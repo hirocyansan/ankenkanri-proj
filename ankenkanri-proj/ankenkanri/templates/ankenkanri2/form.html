@@ -1,0 +1,206 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>案件管理システム</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+        {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> {% endcomment %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    </head>
+    <div class="card bg-light mb-3" style="max-width: 950pt;">
+
+        <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>データ編集（登録、編集、削除）</h3>
+        </div>
+    </div>
+</div>
+
+        
+<div style="margin: 15px 15px; ">
+        {% comment %} <div class="d-grid gap-2 d-md-block justify-content-center"> {% endcomment %}
+        <a  class="btn btn-primary" onclick="location.href='index'" type="submit" style="width:135pt;height:45pt;margin: 5px 5px;">TOPへ戻る</a>
+
+</div>
+    
+<body>
+    <div class="form-group" style="display:inline-flex">
+        {% comment %} <div class="formList"> {% endcomment %}
+        <form action="edit2" method='POST' class="form-inline" class="form-inline">
+        {% csrf_token %}
+        {{ form.as_p}}   
+         {% comment %} {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}   {% endcomment %}
+
+
+
+        {% comment %} <table>    
+        {{form.as_table}}
+        </table> {% endcomment %}
+        <input type="submit"  class="btn btn-primary" onclick="location.href='edit2'"  style="width:135pt;height:45pt;margin: 5px 5px;" value="確定">
+        </form>
+        {% comment %} </div> {% endcomment %}
+    </div>
+        
+        <div style="height:290px; width:1280px; overflow:scroll" class="anken-table">
+        {% comment %} <div style="overflow:scroll" class="anken-table"> {% endcomment %}
+            <table>
+                    <tr>
+                        <th nowrat >管理No.を入力して処理</th>
+                        <th nowrat >変更</th>
+                        <th nowrat >コピー</th>
+                        <th nowrat >削除</th>
+                        <th nowrat >id</th>
+                        <th nowrat >経理承認</th>
+                        <th nowrat >ステータスコード</th>
+                        <th nowrat >案件ステータス</th>
+                        <th nowrat >枝番グループ</th>
+                        <th nowrat >支払パターン</th>
+                        <th nowrat >管理No.</th>
+                        <th nowrat >枝番</th>
+                        <th nowrat >案件名</th>
+                        <th nowrat >取引先コード</th>
+                        <th nowrat >取引先名</th>
+                        <th nowrat >勘定科目</th>
+                        <th nowrat >計画単価</th>
+                        <th nowrat >計画数</th>
+                        <th nowrat >計画合計金額</th>
+                        <th nowrat >見積単価</th>
+                        <th nowrat >見積数</th>
+                        <th nowrat >見積合計金額</th>
+                        <th nowrat >見積書リンク</th>
+                        <th nowrat >稟議書単価</th>
+                        <th nowrat >稟議書数</th>
+                        <th nowrat >稟議書合計</th>
+                        <th nowrat >稟議書No.</th>
+                        <th nowrat >稟議書リンク</th>
+                        <th nowrat >ワークフローNo.</th>
+                        <th nowrat >契約金額</th>
+                        <th nowrat >契約書No.</th>
+                        <th nowrat >契約書リンク</th>
+                        <th nowrat >押捺稟議No.</th>
+                        <th nowrat >押捺稟議リンク</th>
+                        <th nowrat >注文単価</th>
+                        <th nowrat >注文数</th>
+                        <th nowrat >注文合計金額</th>
+                        <th nowrat >注文書リンク</th>
+                        <th nowrat >納品日期限</th>
+                        <th nowrat >検収日期限</th>
+                        <th nowrat >支払日期限</th>
+                        <th nowrat >納品単価</th>
+                        <th nowrat >納品数</th>
+                        <th nowrat >納品合計金額</th>
+                        <th nowrat >納品書リンク</th>
+                        <th nowrat >支払単価</th>
+                        <th nowrat >購入数</th>
+                        <th nowrat >購入合計金額</th>
+                        <th nowrat >請求書リンク情報</th>
+                        <th nowrat >計画－実績</th>
+                        <th nowrat >支払繰返し期限</th>
+                        <th nowrat >購入会社</th>
+                        <th nowrat >最終データ更新日</th>
+                        <th nowrat >最終更新者</th>
+                        <th nowrat >社員番号</th>
+                        <th nowrat >担当者名</th>
+                        <th nowrat >コメント</th>
+                        <th nowrat >表示順</th>
+                        
+                        
+
+                    </tr>
+                
+            
+
+
+        
+
+
+                {% for anken in ankenList %}
+                <tr>
+                    <th nowrat ><input type="checkbox"></th>
+                    <th nowrat ><input type="checkbox"></th>
+                    <th nowrat ><input type="checkbox"></th>
+                    <th nowrat ><input type="checkbox"></th>
+                    <th nowrat >{{anken.id}}</th>
+                    <td nowrat >{{anken.keiriShonin}}</td>
+                    <td nowrat >{{anken.statusCode}}</td>
+                    <td nowrat >{{anken.status}}</td>
+                    <td nowrat >{{anken.edabanGroup}}</td>
+                    <td nowrat >{{anken.shiharaiPattern}}</td>
+                    <td nowrat >{{anken.kanriNo}}</td>
+                    <td nowrat >{{anken.edaban}}</td>
+                    <td nowrat >{{anken.ankenMei}}</td>
+                    <td nowrat >{{anken.torihikisakiCode}}</td>
+                    <td nowrat >{{anken.torihikisakiMei}}</td>
+                    <td nowrat >{{anken.kanjokamoku}}</td>
+                    <td nowrat >{{anken.keikakuTanka}}</td>
+                    <td nowrat >{{anken.keikakuSuu}}</td>
+                    <td nowrat >{{anken.keikakuGokei}}</td>
+                    <td nowrat >{{anken.mitsumoriTanka}}</td>
+                    <td nowrat >{{anken.mitsumoriSuu}}</td>
+                    <td nowrat >{{anken.mitsumoriGokei}}</td>
+                    <td nowrat >{{anken.mitsumoriLink}}</td>
+                    <td nowrat >{{anken.ringiTanka}}</td>
+                    <td nowrat >{{anken.ringiSuu}}</td>
+                    <td nowrat >{{anken.ringiGokei}}</td>
+                    <td nowrat >{{anken.ringishoNo}}</td>
+                    <td nowrat >{{anken.ringishoLink}}</td>
+                    <td nowrat >{{anken.wfNo}}</td>
+                    <td nowrat >{{anken.keiyakuKingaku}}</td>
+                    <td nowrat >{{anken.keiyakushoNo}}</td>
+                    <td nowrat >{{anken.keiyakushoLink}}</td>
+                    <td nowrat >{{anken.onatsuRingiNo}}</td>
+                    <td nowrat >{{anken.onatsuRingiLink}}</td>
+                    <td nowrat >{{anken.chumonTanka}}</td>
+                    <td nowrat >{{anken.chumonSuu}}</td>
+                    <td nowrat >{{anken.chumonGokei}}</td>
+                    <td nowrat >{{anken.chumonLink}}</td>
+                    <td nowrat >{{anken.nohinKigen}}</td>
+                    <td nowrat >{{anken.kenshuKigen}}</td>
+                    <td nowrat >{{anken.shiharaiKigen}}</td>
+                    <td nowrat >{{anken.nohinTanka}}</td>
+                    <td nowrat >{{anken.nohinSuu}}</td>
+                    <td nowrat >{{anken.nohinGokei}}</td>
+                    <td nowrat >{{anken.nohinLink}}</td>
+                    <td nowrat >{{anken.shiharaiTanka}}</td>
+                    <td nowrat >{{anken.konyuSuu}}</td>
+                    <td nowrat >{{anken.konyuGokei}}</td>
+                    <td nowrat >{{anken.seikyushoLink}}</td>
+                    <td nowrat >{{anken.keikaku_Jisseki}}</td>
+                    <td nowrat >{{anken.kurikaeshiKigen}}</td>
+                    <td nowrat >{{anken.konyuKaisha}}</td>
+                    <td nowrat >{{anken.dataKoshinbi}}</td>
+                    <td nowrat >{{anken.saishuKoshinsha}}</td>
+                    <td nowrat >{{anken.shainNo}}</td>
+                    <td nowrat >{{anken.tantosha}}</td>
+                    <td nowrat >{{anken.comment}}</td>
+                    <td nowrat >{{anken.hyojijun}}</td>
+                    
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>

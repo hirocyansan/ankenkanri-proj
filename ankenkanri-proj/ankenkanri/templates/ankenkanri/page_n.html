@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% comment %} {% load boost %} {% endcomment %}
+
+{% block title%}ページN{% endblock %}
+
+{% block content %}
+
+<div class="card bg-light mb-3" style="max-width:850pt;">
+  <div class="card-header" ><div class="p-3 mb-2 bg-info text-white"><h3>現状の進捗</h3></div></div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+      <p class="card-text">
+        <h6>
+        {% for obj in q %}
+            {% if obj.keiriShonin == False %}
+               <div style="color: #3B3838"><li><bold><font size="5">選択中の案件番号＝{{ obj.kanriNo }} 枝番＝{{ obj.edaban }}</bold></br><font size="3">（ステータス＝{{ obj.status }}、コード＝{{ obj.statusCode }}、<font style="color:red;"><b>経理承認＝{{ obj.keiriShonin}}</b></font>、支払パターン＝{{ obj.shiharaiPattern }}、案件名＝{{ obj.ankenMei }}）
+               </font></font></li></div>
+            {% else %}
+               <div style="color: #3B3838"><li><bold><font size="5">選択中の案件番号＝{{ obj.kanriNo }} 枝番＝{{ obj.edaban }}</bold></br><font size="3">（ステータス＝{{ obj.status }}、コード＝{{ obj.statusCode }}、経理承認＝{{ obj.keiriShonin}}、支払パターン＝{{ obj.shiharaiPattern }}、案件名＝{{ obj.ankenMei }}）
+               </font></font></li></div>
+            {% endif %}
+        {% endfor %}
+        </h6>      
+        <h5><nobr>
+        {% for i in badgeName %}
+            {% if forloop.counter <= badgeGray %}
+                <span class="badge text-bg-secondary" style="width:110pt;height:30pt;margin: 5px 5px;">☑{{ i | linebreaksbr }}</span>
+                <span class="badge text-bg-light">
+                {% if forloop.counter < 10 %}＞{% endif %}</span>
+                {% if forloop.counter == 5 %} </br> {% endif %}
+            {% else %}
+                <span class="badge text-bg-info" style="width:110pt;height:30pt;margin: 5px 5px;">☐{{ i | linebreaksbr }}</span>
+                <span class="badge text-bg-light">
+                {% if forloop.counter < 10 %}＞{% endif %}</span>
+                {% if forloop.counter == 5 %} </br> {% endif %}
+            {% endif %}
+        {% endfor %}
+  </div>
+  </div>
+</div>
+<div class="card bg-light mb-3" style="max-width:850pt;">
+  <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>終了済み処理を選択してください。</h3></div></div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+      <p class="card-text">
+        <form action="/ankenkanri/page_n" method="POST">{% csrf_token %}
+        <h4><nobr>
+            {% comment %} {% for i, j in zip(buttonName, buttonName2) %} {% endcomment %}
+            {% comment %} {% for i, j in buttonName|zip:buttonName2 %} {% endcomment %}
+              {% for j, i in buttonName0.items %}
+                {% if forloop.counter <= buttonGray %}  
+                        <button class="btn btn-secondary" type="submit" name="{{ j }}" style="font-size:20px;width:250pt;height:35pt;margin: 5px 5px;">{{ i }}</button>
+                    {% if forloop.counter == 3 %} </br> {% endif %}
+                    {% if forloop.counter == 6 %} </br> {% endif %}
+                    {% if forloop.counter == 9 %} </br> {% endif %}            
+                {% else %}
+                    <button class="btn btn-primary" type="submit" name="{{ j }}" style="font-size:20px;width:250pt;height:35pt;margin: 5px 5px;">{{ i }}</button>
+                    {% if forloop.counter == 3 %} </br> {% endif %}
+                    {% if forloop.counter == 6 %} </br> {% endif %}
+                    {% if forloop.counter == 9 %} </br> {% endif %}            
+                {% endif %}
+              {% endfor %}
+            {% comment %} <a href="/ankenkanri/rtn-top" class="btn btn-primary" name="buttonRTop" style="width:250pt;height:35pt;margin: 5px 5px;">TOPへ戻る</a> {% endcomment %}
+	          <button class="btn btn-primary" type="submit" name="pageTop" style="font-size:20px;width:250pt;height:35pt;margin: 5px 5px;"> TOPへ戻る</button>
+        </form>
+        </nobr></h4>
+  </div>
+  </div>
+</div>
+
+
+
+  {% comment %} <div>
+   <ul><h3><li>現状の進捗</li></h3></ul>
+   <h6>
+      {% for obj in q %}
+        （案件番号＝{{ obj.kanriNo }}、ステータス＝{{ obj.status }}、コード＝{{ obj.statusCode }}、経理承認＝{{ obj.keiriShonin}}、支払パターン＝{{ obj.shiharaiPattern }}、案件名＝{{ obj.ankenMei }}）
+      {% endfor %}
+    </h6>
+  </div>
+
+    <h5><nobr>
+    {% for i in badgeName %}
+        {% if forloop.counter <= badgeGray %}
+            <span class="badge text-bg-secondary" style="width:110pt;height:30pt;margin: 5px 5px;">☑{{ i | linebreaksbr }}</span>
+            <span class="badge text-bg-light">＞</span> 
+            {% if forloop.counter == 5 %} </br> {% endif %}
+        {% else %}
+            <span class="badge text-bg-info" style="width:110pt;height:30pt;margin: 5px 5px;">☐{{ i | linebreaksbr }}</span>
+            <span class="badge text-bg-light">＞</span>
+            {% if forloop.counter == 5 %} </br> {% endif %}
+        {% endif %}
+    {% endfor %}
+
+<br>   
+<ul><h3><li>完了した処理を選択してください。</li></h3></ul>
+<form method="POST">{% csrf_token %}
+<h4><nobr>
+    {% for i, j in buttonName|zip:buttonName2 %}
+        {% if forloop.counter <= buttonGray %}  
+<!--            <h5>buttonName2 ="{{ j }}"</h5>
+              <h5> escape test = {% autoescape off %} {{ "j" }} {% endautoescape %} </h5>  -->
+                <button class="btn btn-secondary" type="submit" name="{{ j }}" style="width:250pt;height:35pt;margin: 5px 5px;">{{ i }}</button>
+            {% if forloop.counter == 3 %} </br> {% endif %}
+            {% if forloop.counter == 6 %} </br> {% endif %}
+            {% if forloop.counter == 9 %} </br> {% endif %}            
+        {% else %}
+<!--            <h5>buttonName2AA ={{ j }}</h5>  -->
+            <button class="btn btn-primary" type="submit" name="{{ j }}" style="width:250pt;height:35pt;margin: 5px 5px;">{{ i }}</button>
+            {% if forloop.counter == 3 %} </br> {% endif %}
+            {% if forloop.counter == 6 %} </br> {% endif %}
+            {% if forloop.counter == 9 %} </br> {% endif %}            
+        {% endif %}
+    {% endfor %}
+    <a href="/ankenkanri/rtn-top" class="btn btn-primary" name="buttonRTop" style="width:250pt;height:35pt;margin: 5px 5px;">TOPへ戻る</a>
+</form>
+</nobr></h4> {% endcomment %}
+
+{% endblock content %}

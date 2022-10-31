@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+
+{% block title%}serch{% endblock %}
+
+{% block content %}
+
+{% comment %} c1 ={{ c1 }}
+c2 ={{ c2 }}
+c3 ={{ c3 }}
+c4 ={{ c4 }}
+c5 ={{ c5 }}
+c6 ={{ c6 }}
+c7 ={{ c7 }}
+c8 ={{ c8 }}
+c9 ={{ c9 }}
+c10={{ c10 }} {% endcomment %}
+
+{% comment %} ## タイトル　スタート、クリアボタン {% endcomment %}
+<div class="card bg-light mb-3" style="max-width: 600pt;">
+  <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>検索機能</h3></div></div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <nobr>
+    <p class="card-text">検索条件を入力して「スタート」ボタンを押してください。:
+
+
+    <form action="/ankenkanri/searchExec" method="POST">{% csrf_token %}
+      <nobr>
+        <div class="alert alert-info" role="alert" style="width:560pt;height:45pt;margin: 5px 5px;">
+          以下の検索条件入力後、検索 →
+          <button class="btn btn-primary" type="submit" name="searchStart" style="width:100pt;height:30pt;margin: 5px 5px;"> スタート！</button> &nbsp;&nbsp; 
+          以下の検索条件を →
+          <button class="btn btn-primary" type="submit" name="dataClear" style="width:100pt;height:30pt;margin: 5px 5px;"> クリア</button> &nbsp;&nbsp; 
+        </div>
+      </nobr>
+      <nobr>
+      <div class="alert alert-info" role="alert" style="width:560pt;height:45pt;margin: 5px 5px;">
+        検索タイプ　　：
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="searchType" id="inlineRadio1" value="andSearch" {{ c1 }}>
+          <label class="form-check-label" for="inlineRadio1">ANDサーチ</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="searchType" id="inlineRadio2" value="orSearch" {{ c2 }}>
+          <label class="form-check-label" for="inlineRadio2">ORサーチ　(いずれか一方を選択)</label>
+        </div>
+      </div>
+      </nobr>          
+
+{% comment %} ##  ドロップメニューアイテム（Menu items）{% endcomment %}
+      {% comment %} <!-- Production version -->
+      <script src="https://unpkg.com/@popperjs/core@2"></script> {% endcomment %}
+
+      <div class="dropdown">
+        <nobr>
+        <div class="alert alert-info" role="alert" style="width:560pt;height:45pt;margin: 5px 5px;">
+        並べ替え&ensp;&ensp;&ensp;&ensp;&ensp;：
+        <button type="submit" class="btn btn-info dropdown-toggle" name="dpList" data-bs-toggle="dropdown" aria-expanded="false">
+        並べ替え対象
+        </button>
+        <ul class="dropdown-menu">
+          <li><button type="submit" class="dropdown-item" name="keiriShonin">経理部承認</a></li>
+          <li><button type="submit" class="dropdown-item" name="status">案件ステータス</a></li>
+          <li><button type="submit" class="dropdown-item" name="kanriNo">管理No.</a></li>
+          <li><button type="submit" class="dropdown-item" name="ankenMei">案件名</a></li>
+          <li><button type="submit" class="dropdown-item" name="torihikisakiMei">取引先名</a></li>
+          <li><button type="submit" class="dropdown-item" name="konyuKaisha">購入会社</a></li>
+          <li><button type="submit" class="dropdown-item" name="tantosha">担当者名</a></li>
+          <li><button type="submit" class="dropdown-item" name="saishuKoshinsha">最終編集者</a></li>
+        </ul>
+        （選択中：{{ c25 }}）
+        </div>
+      </div>
+
+      {% comment %} <div class="dropdown">
+      <nobr>
+      <div class="alert alert-info" role="alert" style="width:560pt;height:45pt;margin: 5px 5px;">
+        並べ替え　　　：
+        <button class="btn btn-info dropdown-toggle" type="button" name="dpList" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          並べ替え対象
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" value="経理部承認">経理部承認</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" value="案件ステータス">案件ステータス</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" value="管理No.">管理No.</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" value="案件名">案件名</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" value="取引先名">取引先名</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" value="購入会社">購入会社</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" value="担当者名">担当者名</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" value="最終編集者">最終編集者</a>
+        </div>
+      </div>
+      </div> {% endcomment %}
+
+{% comment %} ## 表示　昇順/降順 {% endcomment %}
+    <div class="alert alert-info" role="alert" style="width:560pt;height:35pt;margin: 5px 5px;">
+      並べ替えルール&ensp;：<div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="orderRule" id="inlineRadio1" value="orderAsc" {{ c3 }}>
+        <label class="form-check-label" for="inlineRadio1">昇順</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="orderRule" id="inlineRadio2" value="orderDesc" {{ c4 }}>
+        <label class="form-check-label" for="inlineRadio2">降順　(いずれか一方を選択)</label>
+      </div>
+    </div>
+
+{% comment %} ## 経理部承認　選択 {% endcomment %}
+    <nobr>
+    <div class="alert alert-info" role="alert" style="width:560pt;height:35pt;margin: 5px 5px;">
+        経理部承認&ensp;&ensp;&ensp;：
+        {% comment %} <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="keiriYN" id="inlineCheckbox1" value="yesNo" {{ c5 }}>
+          <label class="form-check-label" for="inlineCheckbox1">承認済＋未承認</label>
+        </div> {% endcomment %}
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="keiriYN" id="inlineCheckbox2" value="1" {{ c5 }}>
+          <label class="form-check-label" for="inlineCheckbox2">承認済</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="keiriYN" id="inlineCheckbox3" value="0" {{ c6 }}>
+          <label class="form-check-label" for="inlineCheckbox3">未承認　(任意数選択)</label>
+        </div>
+    </div>
+      </nobr>
+
+{% comment %} ## 案件ステータス　選択 {% endcomment %}
+    <nobr>
+    <div class="alert alert-info" role="alert" style="width:560pt;height:35pt;margin: 5px 5px;">
+      案件ステータス&ensp;&thinsp;：
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox1" value="案件入力中" {{ c7 }}>
+        <label class="form-check-label" for="inlinecheckbox1">案件入力中</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox2" value="案件入力完" {{ c8 }}>
+        <label class="form-check-label" for="inlinecheckbox2">案件入力完</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox3" value="見積書作成依頼済" {{ c9 }}>
+        <label class="form-check-label" for="inlinecheckbox3">見積書作成依頼済</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox4" value="見積書入手済" {{ c10 }}>
+        <label class="form-check-label" for="inlinecheckbox4">見積書入手済</label>
+      </div>
+    </div>
+    <div class="alert alert-info" role="alert" style="width:560pt;height:35pt;margin: 5px 5px;">
+      (任意数選択)&ensp;&ensp;：<div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox5" value="稟議書承認完了" {{ c11 }}>
+        <label class="form-check-label" for="inlinecheckbox5">稟議書承認完了</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox6" value="契約書作成完了" {{ c12 }}>
+        <label class="form-check-label" for="inlinecheckbox6">契約書作成完了</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox7" value="契約書締結完了" {{ c13 }}>
+        <label class="form-check-label" for="inlinecheckbox7">契約書締結完了</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox8" value="注文完了" {{ c14 }}>
+        <label class="form-check-label" for="inlinecheckbox8">注文完了</label>
+      </div>
+    </div>
+    <div class="alert alert-info" role="alert" style="width:560pt;height:35pt;margin: 5px 5px;">  
+      &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;：<div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox9" value="納品完了" {{ c15 }}>
+        <label class="form-check-label" for="inlinecheckbox9">納品完了</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox10" value="請求書入手済" {{ c16 }}>
+        <label class="form-check-label" for="inlinecheckbox10">請求書入手済</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox11" value="支払処理完了" {{ c17 }}>
+        <label class="form-check-label" for="inlinecheckbox11">支払処理完了</label>
+      </div>
+    </div>
+    </nobr>
+
+{% comment %} ## kannriNo.、枝番 {% endcomment %}
+    <nobr>
+      <span class="input-group-text" id="basic-addon1">管理No.&emsp;&emsp;&emsp;：
+      <input type="text"  name="kanriNoE" class="form-control" placeholder="英数字のみ" aria-label="Username" aria-describedby="basic-addon1" value={{ c19 }}> 
+    </nobr>
+
+{% comment %} ## 案件名　 {% endcomment %}
+    <nobr>
+      <span class="input-group-text" id="basic-addon1">案件名　　　 ：&nbsp;
+      <input type="text"  name="ankenM" class="form-control" placeholder="最大30文字" aria-label="Username" aria-describedby="basic-addon1" value={{ c20 }}> 
+    </nobr>
+
+{% comment %} ## 取引先名 {% endcomment %}
+    <nobr>
+      <span class="input-group-text" id="basic-addon1">取引先名　　 ：&nbsp;
+      <input type="text"  name="torihikisakiM" class="form-control" placeholder="最大30文字" aria-label="Username" aria-describedby="basic-addon1" value={{ c21 }}> 
+    </nobr>
+
+{% comment %} ## 購入会社 {% endcomment %}
+    <nobr>
+      <span class="input-group-text" id="basic-addon1">購入会社　　 ：&nbsp;
+      <input type="text"  name="konyuG" class="form-control" placeholder="最大30文字" aria-label="Username" aria-describedby="basic-addon1" value={{ c22 }}> 
+    </nobr>
+
+{% comment %} ## 担当者名 {% endcomment %}
+    <nobr>
+      <span class="input-group-text" id="basic-addon1">担当者名　　 ：&nbsp;
+      <input type="text"  name="tantoshaM" class="form-control" placeholder="最大30文字" aria-label="Username" aria-describedby="basic-addon1" value={{ c23 }}> 
+    </nobr>
+
+{% comment %} ## 最終編集者 {% endcomment %}
+    <nobr>
+      <span class="input-group-text" id="basic-addon1">最終編集者　 ：&nbsp;
+      <input type="text"  name="saisyuH" class="form-control" placeholder="最大30文字" aria-label="Username" aria-describedby="basic-addon1" value={{ c24 }}> 
+    </nobr> 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+  crossorigin="anonymous">
+{% comment %} キートップに選択名を表示
+https://mseeeen.msen.jp/bootstrap-4-dropdown-list/　 {% endcomment %}
+      $(function(){
+          $('.dropdown-menu .dropdown-item').click(function(){
+              var visibleItem = $('.dropdown-toggle', $(this).closest('.dropdown'));
+              visibleItem.text($(this).attr('value'));
+          });
+      });
+</script>
+  
+{% comment %} ドロップダウンリストの表面に選択項目を表示
+
+{% comment %} JQERYを使うためのコード {% endcomment %}
+      {% comment %} src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">  {% endcomment %}
+
+{% comment %} ドロップダウンで選択されたテキストを取得する（出来ていない）
+      $(document).ready(function(){
+        var selectedValue = $("#dropdownMenuButton").val(); 
+      }); {% endcomment %}
+
+{% endblock content %}

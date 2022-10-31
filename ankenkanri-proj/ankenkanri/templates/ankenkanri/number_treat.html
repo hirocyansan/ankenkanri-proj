@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}番号入力処理{% endblock %}
+
+{% block content %}
+
+<div class="card bg-light mb-3" style="max-width: 600pt;">
+  <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>管理番号入力処理</h3></div></div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <nobr>
+    <p class="card-text">管理番号を入力して「確定」を押してください。: <h5 style="color:red;"><b>{{ message }}</b></h5>
+    </nobr><nobr>
+        {% comment %} <form action="/ankenkanri/kanriNoCheck" method="POST">{% csrf_token %} {% endcomment %}
+        <form action="/ankenkanri/page_n" method="POST">{% csrf_token %}        
+          <span class="input-group-text" id="basic-addon1">&nbsp;管理番号：
+          <input type="text"  name="kanriNo" class="form-control" placeholder="英数字のみ" aria-label="Username" aria-describedby="basic-addon1">&nbsp;&nbsp;枝番： 
+          <input type="text"  name="edaban" class="form-control" placeholder="0～999（枝番なしの場合、空白）" aria-label="Username" aria-describedby="basic-addon1">&nbsp;&nbsp; 
+          </p></nobr><nobr><div style="text-align: center;">
+          <button class="btn btn-primary" type="submit" name="confirm" style="width:120pt;height:35pt;margin: 5px 5px;"> 確定</button> &nbsp;&nbsp; 
+          {% comment %} <button class="btn btn-primary" type="submit" name="pageTop" style="width:120pt;height:35pt;margin: 5px 5px;"> TOPへ戻る</button> &nbsp;&nbsp;  {% endcomment %}
+          <button class="btn btn-primary" type="submit" name="pageTop" style="width:120pt;height:35pt;margin: 5px 5px;"> TOPへ戻る</button>
+
+          <button class="btn btn-info" type="submit" name="pageSearch" style="width:120pt;height:35pt;margin: 5px 5px;"> 検索へ飛ぶ</button>
+          </div>
+          </nobr></span> 
+        </form>
+        </div>
+      </div>
+    </div>
+
+
+  {% comment %} <body>
+    <h2>管理番号入力からの処理</h2>
+      <!-- <div class="alert alert-primary" role="alert"> -->
+      <nobr>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <form action="/ankenkanri/page_n/" method="POST">{% csrf_token %}
+          <span class="input-group-text" id="basic-addon1">管理番号を入力して「確定」を押してください:&nbsp;
+          <input type="text"  name="inputNo" class="form-control" placeholder="1 .. 9" aria-label="Username" aria-describedby="basic-addon1">&nbsp; 
+          <button type="submit" class="btn btn-primary" style="width:120pt;height:35pt;margin: 5px 5px;">確定</button> &nbsp;&nbsp; 
+          <a href="rtn-top" class="btn btn-primary" style="width:120pt;height:35pt;margin: 5px 5px;">TOPへ戻る</a></span></nobr> 
+        </form>
+        </div>
+      </div>
+    </div>
+  </body> {% endcomment %}
+
+
+{% endblock content %}
+
+<!-- <label>管理番号を入力して「確定」を押してください：<input type="int" name="matStatus" style="background-color:#CCCCFF" placeholder="1, 2, 3 ... " size="10" ><span> &nbsp;</span><input type="submit" style="background-color:#8DA3C4; border-color:#419CC0"; value="確定" ><input type="submit" style="background-color:#8DA3C4; border-color:#419CC0" value="TOPへ戻る" > -->
+
+

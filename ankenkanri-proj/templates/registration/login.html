@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card bg-light mb-3" style="max-width: 600pt;">
+  <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>案件管理サービス　ログイン</h3></div></div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <p class="card-text"><h5 style="color:red;"><b>{{ message }}</b></h5>  <!-- 数字入力時のワーニング表示なので不要だが、とりあえず残す -->
+        <form method="POST" class="p-4 m-4 bg-light border border-success rounded form-group">
+          {% csrf_token %}
+		  {% for error in form.errors.values %}
+		    {{ error }}
+		  {% endfor %}
+
+    <nobr>
+      <span class="input-group-text" id="basic-addon1">&nbsp;user-ID：
+      <input type="text"  name="username" class="form-control" aria-label="Username" aria-describedby="basic-addon1">&nbsp;&nbsp;password： 
+      <input type="password"  name="password" class="form-control" aria-label="Username" aria-describedby="basic-addon1">&nbsp;&nbsp; 
+    </p></nobr>
+    <div style="text-align: center;">
+    <nobr>
+    <button type="submit" class="btn btn-primary" style="width:120pt;height:35pt;margin: 15px 5px;">ログインする</button>
+    <a class="btn btn-primary" style="width:120pt;height:35pt;margin: 15px 5px;" href="{% url 'accounts:signup' %}" role="button">会員登録</a>
+    </nobr></div>
+
+    {% comment %} <a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">会員登録</a> {% endcomment %}
+
+    {% comment %} <div class="card bg-light mb-3" >
+    <div class="card-header" style="max-width:600pt;"><div class="p-3 mb-2 bg-info text-white"><h3>
+        <a class="nav-link mx-3" href="{% url 'accounts:signup' %}">会員登録</a>
+    </h3></div></div> {% endcomment %}
+
+		  {% comment %} <nobr><label>ユーザ ID</label>
+		  <input class="form-control" name="username"></nobr>
+		  <label>パスワード</label>
+		  <input type="password" class="form-control" name="password">
+		  <button type="submit" class="btn btn-primary mt-4">ログインする</button> {% endcomment %}
+
+        </form>
+  </div>
+</div>
+
+  {% comment %} <h1 style="color: #3B3838">案件管理サービス　ログイン</h1>
+  <form method="post" class="p-4 m-4 bg-light border border-success rounded form-group">
+    {% csrf_token %}
+    {% for error in form.errors.values %}
+      {{ error }}
+    {% endfor %}
+    <label>ユーザ ID</label>
+    <input class="form-control" name="username">
+    <label>パスワード</label>
+    <input type="password" class="form-control" name="password">
+    <button type="submit" class="btn btn-success mt-4">ログインする</button>
+  </form> {% endcomment %}
+{% endblock %}

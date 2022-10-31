@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title%}ページ_n0{% endblock %}
+
+{% block content %}
+
+{% if not object.keiriShonin %}
+
+<div class="card" style="width:600pt;height:200pt;margin: 5px 5px;">
+  <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>経理部未承認の状態です。</h3></div></div>
+  <div class="card-body">
+    <form action="/ankenkanri/page_n0/" method="POST">{% csrf_token %}
+    <h5 class="card-title">処理を選択してください。</h5>
+    <p class="card-text"></p>
+        <nobr><div style="text-align: center;">
+        <button class="btn btn-primary" type="submit" name="pageN" style="width:120pt;height:35pt;margin: 5px 5px;"> 無視して進める</button> &nbsp;&nbsp; 
+        <button class="btn btn-primary" type="submit" name="pageTop" style="width:120pt;height:35pt;margin: 5px 5px;"> TOPへ戻る</button>
+    </div></form>
+  </div>
+</div>
+{% endif %} 
+
+  {% comment %} <div>
+    <h3>経理部未承認の状態です。処理を選択してください。</h3>
+    <h5><nobr>
+    <a class="btn btn-primary" href="/ankenkanri/page_n" style="width:130pt;height:35pt;margin: 5px 5px;">未承認のまま進める</a>
+    <a class="btn btn-primary" href="/ankenkanri/rtn-top" style="width:130pt;height:35pt;margin: 5px 5px;">TOPへ戻る</a>
+    </nobr></h5>
+  </div>
+{% endcomment %}
+
+{% endblock content %}

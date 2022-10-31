@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}アカウント作成{% endblock %}
+{% block h1 %}アカウント作成{% endblock %}
+
+{% block content %}
+
+<div class="card bg-light mb-3" style="max-width: 600pt;">
+  <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>案件管理サービス　ユーザ登録</h3></div></div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <p class="card-text"><h5 style="color:red;"><b>{{ message }}</b></h5>  <!-- 数字入力時のワーニング表示なので不要だが、とりあえず残す -->
+        <form method="POST" class="p-4 m-4 bg-light border border-success rounded form-group">
+          {% csrf_token %}
+<nobr>
+	  <span class="input-group-text" id="basic-addon1">&nbsp;登録ID,passを入力してください。</span>user-ID：
+    <input type="text"  name="username" class="form-control" aria-label="Username" aria-describedby="basic-addon1">&nbsp;&nbsp;password： 
+    <input type="password"  name="password1" class="form-control" aria-label="Username" aria-describedby="basic-addon1">&nbsp;&nbsp;passwprd(確認用)：
+    <input type="password"  name="password2" class="form-control" aria-label="Username" aria-describedby="basic-addon1">&nbsp;&nbsp; 	  
+</p></nobr>
+      {% if form.errors %}
+      <span class="mb-2 small text-danger d-block text-start">利用できないユーザー ID やパスワードの可能性があります。入力内容を再度ご確認ください。</span>
+    {% endif %}
+	
+    <div style="text-align: center;">
+    <button type="submit" class="btn btn-primary" style="width:120pt;height:35pt;margin: 15px 5px;">アカウント作成</button>
+    </div>
+	</form>
+
+  {% comment %} <form method="post" class="p-4 m-4 bg-light border border-success rounded form-group">
+    {% csrf_token %}
+    <input type="text" name="username" class="form-control mt-4" placeholder="ユーザー ID">
+    <input type="password" name="password1" class="form-control mt-4" placeholder="パスワード">
+    <input type="password" name="password2" class="form-control mt-4" placeholder="パスワード確認用">
+    {% if form.errors %}
+      <span class="mb-2 small text-danger d-block text-start">利用できないユーザー ID やパスワードの可能性があります。入力内容を再度ご確認ください。</span>
+    {% endif %}
+    
+    <div style="text-align: center;">
+    <button type="submit" class="btn btn-primary" style="width:120pt;height:35pt;margin: 15px 5px;">アカウント作成</button>
+    </div>
+  </form> {% endcomment %}
+
+{% endblock %}

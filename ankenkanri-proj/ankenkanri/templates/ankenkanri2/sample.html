@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Sample{{ block.super }} {% endblock %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+<h1>{{ name|upper }}</h1>
+<h1>ホームページ：{{ page_url|urlize }}</h1>
+<h2>BMI:{{ bmi | floatformat:2}}</h2>
+<h2>{{ fruits |join:', '}}</h2>
+<h2>{{ msg |linebreaks}}</h2>
+<h2>Sample</h2>
+<a href="{% url 'first_app:home' %}">home</a>
+<img src="{% static 'sample.jpg' %}">
+{% endblock %}

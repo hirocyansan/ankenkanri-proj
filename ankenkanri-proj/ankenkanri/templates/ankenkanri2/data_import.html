@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>案件管理システム</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        
+    </head>
+    
+        <h2><font color="blue">案件管理システム &emsp;&emsp;データインポート </font></h2>
+    
+   
+        <input type="file" accept=".xlsx"><br><br>
+
+
+
+        <table class="table table-bordered" border="1">
+            <thead>
+                <tr>
+                    <th scopi="col">id</th>
+                    <th scopi="col">経理承認</th>
+                    <th scopi="col">ステータスコード</th>
+                    <th scopi="col">案件ステータス</th>
+                    <th scopi="col">枝番グループ</th>
+                    <th scopi="col">支払パターン</th>
+                    <th scopi="col">管理No.</th>
+                    <th scopi="col">枝番</th>
+                    <th scopi="col">案件名</th>
+                    <th scopi="col">取引先コード</th>
+                    <th scopi="col">取引先名</th>
+                    <th scopi="col">勘定科目</th>
+                    <th scopi="col">計画単価A</th>
+                    <th scopi="col">計画数B</th>
+                    <th scopi="col">計画合計金額<br>税込C=A×B</th>
+                    <th scopi="col">見積単価D</th>
+                    <th scopi="col">見積数E</th>
+                    <th scopi="col">見積合計金額<br>税込F=D×E</th>
+                    <th scopi="col">見積書リンク</th>
+                    <th scopi="col">wfNo</th>
+                    <th scopi="col">契約金額</th>
+                    <th scopi="col">注文単価G</th>
+                    <th scopi="col">注文数H</th>
+                    <th scopi="col">注文合計金額<br>税込I=G×H</th>
+                    <th scopi="col">注文書リンク</th>
+                    <th scopi="col">納品単価J</th>
+                    <th scopi="col">納品数K</th>
+                    <th scopi="col">納品合計金額<br>税込L=J×K</th>
+                    <th scopi="col">支払単価M</th>
+                    <th scopi="col">購入数N</th>
+                    <th scopi="col">購入合計金額<br>税込O=M×N</th>
+                    <th scopi="col">請求書リンク</th>
+                    <th scopi="col">計画－実績<br>G=C-O</th>
+                    <th scopi="col">納品日期限</th>
+                    <th scopi="col">検収日期限</th>
+                    <th scopi="col">支払日期限</th>
+                    <th scopi="col">支払繰返し期限</th>
+                    <th scopi="col">関連稟議書</th>
+                    <th scopi="col">契約書</th>
+                    <th scopi="col">購入会社</th>
+                    <th scopi="col">最終データ更新日</th>
+                    <th scopi="col">最終更新者</th>
+                    <th scopi="col">社員番号</th>
+                    <th scopi="col">担当者名</th>
+                    <th scopi="col">コメント</th>
+                </tr>
+            </thead> 
+
+
+
+    
+<body>
+
+    {% for anken in ankenList %}
+    <tr>
+    <td>{{anken.id}}</td>
+    <td>{{anken.keiriShonin}}</td>
+    <td>{{anken.statusCord}}</td>
+    <td>{{anken.status}}</td>
+    <td>{{anken.edabanGroup}}</td>
+    <td>{{anken.shiharaiPattern}}</td>
+    <td>{{anken.kanriNo}}</td>
+    <td>{{anken.edaban}}</td>
+    <td>{{anken.ankenMei}}</td>
+    <td>{{anken.torihikisakiCode}}</td>
+    <td>{{anken.torihikisakiMei}}</td>
+    <td>{{anken.kanjokamoku}}</td>
+    <td>{{anken.keikakuTanka}}</td>
+    <td>{{anken.keikakuSuu}}</td>
+    <td>{{anken.keikakuGokei}}</td>
+    <td>{{anken.mitsumoriTanka}}</td>
+    <td>{{anken.mitsumoriSuu}}</td>
+    <td>{{anken.mitsumoriGokei}}</td>
+    <td>{{anken.mtsumoriLink}}</td>
+    <td>{{anken.wfNo}}</td>
+    <td>{{anken.keiyakuKingaku}}</td>
+    <td>{{anken.chumonTanka}}</td>
+    <td>{{anken.chumonSuu}}</td>
+    <td>{{anken.chumonGokei}}</td>
+    <td>{{anken.chumonLink}}</td>
+    <td>{{anken.nohinTanka}}</td>
+    <td>{{anken.nohinSuu}}</td>
+    <td>{{anken.nohinGokei}}</td>
+    <td>{{anken.shiharaiTanka}}</td>
+    <td>{{anken.konyuSuu}}</td>
+    <td>{{anken.konyuGokei}}</td>
+    <td>{{anken.seikyushoLink}}</td>
+    <td>{{anken.keikaku_Jisseki}}</td>
+    <td>{{anken.nohinKigen}}</td>
+    <td>{{anken.kenshuKigen}}</td>
+    <td>{{anken.shiharaiKigen}}</td>
+    <td>{{anken.kurikaeshiKigen}}</td>
+    <td>{{anken.ringishoLink}}</td>
+    <td>{{anken.keiyakushoLink}}</td>
+    <td>{{anken.konyuKaisha}}</td>
+    <td>{{anken.dataKoshinbi}}</td>
+    <td>{{anken.saishuKoshinsha}}</td>
+    <td>{{anken.shainNo}}</td>
+    <td>{{anken.tantosha}}</td>
+    <td>{{anken.comment}}</td>
+    </tr>
+        {% endfor %}
+</table>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>

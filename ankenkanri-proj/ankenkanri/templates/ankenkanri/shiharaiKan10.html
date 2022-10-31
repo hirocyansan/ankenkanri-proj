@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title%}支払処理完了{% endblock %}
+
+{% block content %}
+
+
+<div class="card bg-light mb-3" style="max-width:600pt;">
+  <div class="card-header" ><div class="p-3 mb-2 bg-info text-white"><h3>現状の進捗</h3></div></div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+      <p class="card-text">
+        <h6>
+        {% for obj in q %}
+            {% if obj.keiriShonin == False %}
+               <div style="color: #3B3838"><li><bold><font size="5">選択中の案件番号＝{{ obj.kanriNo }} 枝番＝{{ obj.edaban }}</bold></br><font size="3">（ステータス＝{{ obj.status }}、コード＝{{ obj.statusCode }}、<font style="color:red;"><b>経理承認＝{{ obj.keiriShonin}}</b></font>、支払パターン＝{{ obj.shiharaiPattern }}、案件名＝{{ obj.ankenMei }}）
+               </font></font></li></div>
+            {% else %}
+               <div style="color: #3B3838"><li><bold><font size="5">選択中の案件番号＝{{ obj.kanriNo }} 枝番＝{{ obj.edaban }}</bold></br><font size="3">（ステータス＝{{ obj.status }}、コード＝{{ obj.statusCode }}、経理承認＝{{ obj.keiriShonin}}、支払パターン＝{{ obj.shiharaiPattern }}、案件名＝{{ obj.ankenMei }}）
+               </font></font></li></div>
+            {% endif %}
+        {% endfor %}
+        </h6>
+      </p>
+  </div>
+</div>
+
+<div class="card bg-light mb-3" style="max-width: 600pt;">
+  <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>支払処理完了</h3></div></div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <nobr>
+    <p class="card-text">経理に支払処理を依頼完了した場合には「終了」、そうではない場合は「前画面に戻る」又は「TOPへ戻る」<br>を押してください。
+
+        <form action="/ankenkanri/shiharaiSave" method="POST">{% csrf_token %}
+          <div style="text-align: center;">
+          <button class="btn btn-primary" type="submit" name="confirm" style="width:120pt;height:35pt;margin: 5px 5px;"> 終了</button> &nbsp;&nbsp; 
+          <button class="btn btn-primary" type="submit" name="pagePrev" style="width:120pt;height:35pt;margin: 5px 5px;"> 前画面に戻る</button> &nbsp;&nbsp; 
+          <button class="btn btn-primary" type="submit" name="pageTop" style="width:120pt;height:35pt;margin: 5px 5px;"> TOPへ戻る</button> &nbsp;&nbsp; 
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock content %}
