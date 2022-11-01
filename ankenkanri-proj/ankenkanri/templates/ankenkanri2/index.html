@@ -7,51 +7,52 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>案件管理システム</title>
         <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
-        {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> {% endcomment %}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        {% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> {% endcomment %}
     </head>
-
-    <div class="card bg-light mb-3" style="max-width: 950pt;">
-
+    <div class="card bg-light mb-3" style="max-width: 950pt; margin-left: 10px; margin-top: 10px;">
         <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>案件管理システム &emsp;&emsp;メインメニュー </h3>
         </div></div>
-    </div>
 <body> 
   <div class="card-body">
-  <form action="/ankenkanri/service_start" method="POST">{% csrf_token %}
-    {% comment %} <h5 class="card-title">ステータスを<b><font style="color:blue;">案件入力完了</font></b>に設定しました。</h5>
-    <p class="card-text">いずれかをクリックしてください。</p> {% endcomment %}
+    <h5 class="card-title"></h5>
+      <p class="card-text">
+        <h6>
+        <form action="/ankenkanri/service_start" method="POST">{% csrf_token %}
+            {% comment %} <h5 class="card-title">ステータスを<b><font style="color:blue;">案件入力完了</font></b>に設定しました。</h5>
+            <p class="card-text">いずれかをクリックしてください。</p> {% endcomment %}
 
-    <div style="margin: 15px 15px; ">
-        <button class="btn btn-primary" type="submit" name="searchButton" style="width:135pt;height:45pt;margin: 5px 5px;">検索して処理</button>
-        <button class="btn btn-primary" type="submit" name="kanriNoButton" style="width:135pt;height:45pt;margin: 5px 5px;">管理No.入力して<br>処理</button>
-        <button class="btn btn-primary" type="submit" name="dataEditButton" style="width:135pt;height:45pt;margin: 5px 5px;">データ編集<br><small>（登録、編集、削除）</small></button>
-        <button class="btn btn-primary" type="submit" name="dataExportButton" style="width:135pt;height:45pt;margin: 5px 5px;">データエクスポート</button>
-        <button class="btn btn-primary" type="submit" name="dataImportButton" style="width:135pt;height:45pt;margin: 5px 5px;">データインポート<br>（管理者のみ）</button>
-        <button class="btn btn-primary" type="submit" name="usageButton" style="width:135pt;height:45pt;margin: 5px 5px;">使い方</button><br><br>
-    </div></form>
+            <div style="margin: 15px 15px; ">
+                <nobr>
+                <button class="btn btn-success" type="submit" name="searchButton" style="font-size:20px;width:200pt;height:70pt;margin: 5px 20px 20px 0px;">検索して処理</button>
+                <button class="btn btn-success" type="submit" name="kanriNoButton" style="font-size:20px;width:200pt;height:70pt;margin: 5px 20px 20px 20px;">管理No.入力して<br>処理</button>
+                <button class="btn btn-success" type="submit" name="dataEditButton" style="font-size:20px;width:200pt;height:70pt;margin: 5px 20px 20px 20px;">データ編集<br><small>（登録、編集、削除）</small></button>
+                <button class="btn btn-success" type="submit" name="dataExportButton" style="font-size:20px;width:200pt;height:70pt;margin: 5px 0px 20px 20px;">データエクスポート</button>
+                </nobr>
+                <nobr>
+                <button class="btn btn-success" type="submit" name="dataImportButton" style="font-size:20px;width:200pt;height:70pt;margin: 20px 20px 1px 0px;">データインポート<br>（管理者のみ）</button>
+                <button class="btn btn-success" type="submit" name="usageButton" style="font-size:20px;width:200pt;height:70pt;margin: 20px 20px 1px 20px;">使い方</button>
+                <button class="btn btn-success" type="submit" name="usageButton-2" style="font-size:20px;width:200pt;height:70pt;margin: 20px 20px 1px 20px;"></button>
+                <button class="btn btn-success" type="submit" name="terminateButton" style="font-size:20px;width:200pt;height:70pt;margin: 20px 0px 1px 20px;">終了</button>
+                </nobr>
+            </div></form></h6>
   </div>
 
-    {% comment %} <div class="card bg-light mb-3" style="max-width: 950pt;">
-
-        <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>案件管理システム &emsp;&emsp;メインメニュー </h3>
-        </div></div>
-    </div>
-<body>       
-<div style="margin: 15px 15px; ">
-        <a  class="btn btn-primary" href="index" type="submit" style="width:135pt;height:45pt;margin: 5px 5px;">検索して処理</a>
-        <a  class="btn btn-primary" href="index" type="submit" style="width:135pt;height:45pt;margin: 5px 5px;">管理No.入力して<br>処理</a>
-        <a  class="btn btn-primary" href="edit" type="submit" style="width:135pt;height:45pt;margin: 5px 5px;">データ編集<br><small>（登録、編集、削除）</small></span></a> 
-        <a  class="btn btn-primary" href="export" type="submit" style="width:135pt;height:45pt;margin: 5px 5px;">データエクスポート</a>
-        <a  class="btn btn-primary" href="import" type="submit" style="width:135pt;height:45pt;margin: 5px 5px;">データインポート<br>（管理者のみ）</a>
-        <a  class="btn btn-primary" href="index" type="submit" style="width:135pt;height:45pt;margin: 5px 5px;">使い方</a><br><br>
-</div> {% endcomment %}
-        
+  {% comment %} <div class="card-body">
+  <form action="/ankenkanri/service_start" method="POST">{% csrf_token %}
+    <div style="margin: 15px 15px; ">
+        <button class="btn btn-primary" type="submit" name="searchButton" style="font-size:20px;width:250pt;height:70pt;margin: 5px 20px 20px 20px;">検索して処理</button>
+        <button class="btn btn-secondary" type="submit" name="kanriNoButton" style="font-size:20px;width:250pt;height:70pt;margin: 5px 20px 20px 20px;">管理No.入力して<br>処理</button>
+        <button class="btn btn-success" type="submit" name="dataEditButton" style="font-size:20px;width:250pt;height:70pt;margin: 5px 20px 20px 20px;">データ編集<br><small>（登録、編集、削除）</small></button>
+        <button class="btn btn-info" type="submit" name="dataExportButton" style="font-size:20px;width:250pt;height:70pt;margin: 20px 20px 1px 20px;">データエクスポート</button>
+        <button class="btn btn-warning" type="submit" name="dataImportButton" style="font-size:20px;width:250pt;height:70pt;margin: 20px 20px 1px 20px;">データインポート<br>（管理者のみ）</button>
+        <button class="btn btn-danger" type="submit" name="usageButton" style="font-size:20px;width:250pt;height:70pt;margin: 20px 20px 1px 20px;">使い方</button><br><br>
+    </div></form>
+  </div> {% endcomment %}
 
     
    
-        <div style="height:290px; width:1280px; overflow:scroll" class="anken-table">
+        <div style="height:290px; width:1250px; margin-left: 10px; overflow:scroll" class="anken-table">
         
             <table >
                     <tr>
@@ -489,5 +490,7 @@
                 }
             }
         </script> 
+        <p align="right">&copy;Copyright ADVANTEC Grp.SYSTEM Div. All right reserved.</p>
+    </div>
     </body>
 </html>

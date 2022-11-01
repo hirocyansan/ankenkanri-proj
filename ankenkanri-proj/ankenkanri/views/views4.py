@@ -27,10 +27,12 @@ from .views1 import setStatusCodeCEdaban, contextSet, contextSetWMessage
 ## 金額が入力されているかチェック 
 
 def dataCheck(tanka, kosu):
-    if (tanka in None) or (tanka == ""):
+
+    if len(str(tanka)) == 0 or (not str(tanka)) :
         return 'NG'
     else:
-        return tanka*kosu
+        value = tanka*kosu
+        return value
 
 ## 見積書入手済画面でボタンが押された
 def mitsumoriSave(request):   # 入力した見積情報をＤＢに書き込んでpage_n.htmlへ遷移する
@@ -38,7 +40,7 @@ def mitsumoriSave(request):   # 入力した見積情報をＤＢに書き込ん
     context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])
     if "pageTop" in request.POST:
         request.session['sessionDisplayCode'] = 'dp00' 
-        return render(request, 'ankenkanri/top_menu.html')
+        return redirect('/ankenkanri2/index')
     elif  "confirm" in request.POST:
         if (request.POST.get('mitsumoriTanka') is None) or (request.POST.get('mitsumoriTanka') == "") :          ### 空文字検出　いまいち！
             print('Detect 空文字！')
@@ -58,8 +60,9 @@ def mitsumoriSave(request):   # 入力した見積情報をＤＢに書き込ん
         ## 見積単価、見積数、URL、status,statusCodeをDBに記録
         ankenTemp = AnkenStatus.objects.filter(ankenStatusCode=3)
         edabanTemp = request.session['sessionEdaban']
-        if dataCheck(int(form.cleaned_data.get('mitsumoriTanka')), int(form.cleaned_data.get('mitsumoriSuu'))) != 'NG':
-            gokeiTemp = dataCheck(int(form.cleaned_data.get('mitsumoriTanka')), int(form.cleaned_data.get('mitsumoriSuu'))) 
+        result = dataCheck(form.cleaned_data.get('mitsumoriTanka'), form.cleaned_data.get('mitsumoriSuu'))
+        if result != 'NG':
+            gokeiTemp = result 
         else:
             gokeiTemp = 0
         if (edabanTemp is None) or (edabanTemp == ""): 
@@ -97,7 +100,7 @@ def ringiShoninSave(request):
     context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])
     if "pageTop" in request.POST:
         request.session['sessionDisplayCode'] = 'dp00' 
-        return render(request, 'ankenkanri/top_menu.html')
+        return redirect('/ankenkanri2/index')
     elif "skipPage3to4" in request.POST:
         setStatusCodeCEdaban(request, 4)
         print("Detected the skip-button(in dp40)")
@@ -160,7 +163,7 @@ def keiyakusyoSakuseiSave(request):
     context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])
     if "pageTop" in request.POST:
         request.session['sessionDisplayCode'] = 'dp00' 
-        return render(request, 'ankenkanri/top_menu.html')
+        return redirect('/ankenkanri2/index')
     elif "skipPage4to5" in request.POST:
         setStatusCodeCEdaban(request, 5)
         print("Detected the skip-button(in dp50)")
@@ -226,7 +229,7 @@ def keiyakusyoTeiketsuSave(request):
     if "pageTop" in request.POST:
         print("Detected the pageTop-button(in dp60)")
         request.session['sessionDisplayCode'] = 'dp00' 
-        return render(request, 'ankenkanri/top_menu.html')
+        return redirect('/ankenkanri2/index')
     elif "skipPage5to6" in request.POST:
         setStatusCodeCEdaban(request, 6) 
         print("Detected the skip-button(in dp60)")
@@ -282,7 +285,7 @@ def cyuumonSave(request):
     if "pageTop" in request.POST:
         print("Detected the pageTop-button(in dp70)")
         request.session['sessionDisplayCode'] = 'dp00' 
-        return render(request, 'ankenkanri/top_menu.html')
+        return redirect('/ankenkanri2/index')
     elif "skipPage6to7" in request.POST:
         setStatusCodeCEdaban(request, 7) 
         print("Detected the skip-button(in dp70)")
@@ -349,7 +352,7 @@ def cyuumonSave(request):
 def kingakuW(request):
     if "pageTop" in request.POST:
         request.session['sessionDisplayCode'] = 'dp00' 
-        return render(request, 'ankenkanri/top_menu.html')
+        return redirect('/ankenkanri2/index')
     elif "kingakuIA" in request.POST: 
         context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])
         return render(request, 'ankenkanri/nouhinKan8.html', context)
@@ -361,7 +364,7 @@ def kingakuW(request):
 def kingakuW2(request):
     if "pageTop" in request.POST:
         request.session['sessionDisplayCode'] = 'dp00' 
-        return render(request, 'ankenkanri/top_menu.html')
+        return redirect('/ankenkanri2/index')
     elif "kingakuIA" in request.POST: 
         context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])
         return render(request, 'ankenkanri/seikyuusyoNyuusyu9.html', context)
@@ -376,7 +379,7 @@ def nouhinSave(request):
     if "pageTop" in request.POST:
         print("Detected the pageTop-button(in dp80)")
         request.session['sessionDisplayCode'] = 'dp00' 
-        return render(request, 'ankenkanri/top_menu.html')
+        return redirect('/ankenkanri2/index')
     elif "skipPage7to8" in request.POST:
         setStatusCodeCEdaban(request, 8)  ## statusCode = 8
         print("Detected the skip-button(in dp80)")
@@ -505,7 +508,7 @@ def seikyuusyoSave(request):
     if "pageTop" in request.POST:
         print("Detected the pageTop-button(in dp90)")
         request.session['sessionDisplayCode'] = 'dp00' 
-        return render(request, 'ankenkanri/top_menu.html')
+        return redirect('/ankenkanri2/index')
     elif "skipPage8to9" in request.POST:
         setStatusCodeCEdaban(request, 9)   ## statusCode = 9
         print("Detected the skip-button(in dp90)")
@@ -534,8 +537,9 @@ def seikyuusyoSave(request):
 
             ankenTemp = AnkenStatus.objects.filter(ankenStatusCode=9)
             edabanTemp = request.session['sessionEdaban']
-            if dataCheck(int(form.cleaned_data.get('konyuTanka')), int(form.cleaned_data.get('konyuSuu'))) != 'NG':
-                gokeiTemp = dataCheck(int(form.cleaned_data.get('konyuTanka')), int(form.cleaned_data.get('konyuSuu'))) 
+            result = dataCheck(form.cleaned_data.get('shiharaiTanka'), form.cleaned_data.get('konyuSuu'))
+            if result != 'NG':
+                gokeiTemp = result 
             else:
                 gokeiTemp = 0
             keikakuGokei = AnkenList.objects.filter(kanriNo=request.session['sessionKanriNo']).filter(edaban=request.session['sessionEdaban'])[0].keikakuGokei
@@ -594,11 +598,11 @@ def shiharaiSave(request):     ## 多分、支払処理が終わっときのこ�
     if "pageTop" in request.POST:
         print("Detected the pageTop-button(in dp100)")
         request.session['sessionDisplayCode'] = 'dp00' 
-        return render(request, 'ankenkanri/top_menu.html')
+        return redirect('/ankenkanri2/index')
     elif  "confirm" in request.POST:
         setStatusCodeCEdaban(request, 10)  ## statusCode = 10
         request.session['sessionDisplayCode'] = 'dp00' 
-        return render(request, 'ankenkanri/top_menu.html')      
+        return redirect('/ankenkanri2/index')      
     elif "pagePrev" in request.POST:
         request.session['sessionDisplayCode'] = 'dp11' 
         return render(request, 'ankenkanri/page_n.html', context)               

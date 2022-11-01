@@ -5,7 +5,9 @@
   <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>案件管理サービス　ログイン</h3></div></div>
   <div class="card-body">
     <h5 class="card-title"></h5>
-    <p class="card-text"><h5 style="color:red;"><b>{{ message }}</b></h5>  <!-- 数字入力時のワーニング表示なので不要だが、とりあえず残す -->
+    {% comment %} <p class="card-text"><h5>ID/passwordを保有していない場合は<font style="color:blue;">「ユーザ登録」</font>をクリックしてください。</h5>  <!-- 数字入力時のワーニング表示なので不要だが、とりあえず残す --> {% endcomment %}
+    <p class="card-text"><h5></h5>
+
         <form method="POST" class="p-4 m-4 bg-light border border-success rounded form-group">
           {% csrf_token %}
 		  {% for error in form.errors.values %}
@@ -20,7 +22,7 @@
     <div style="text-align: center;">
     <nobr>
     <button type="submit" class="btn btn-primary" style="width:120pt;height:35pt;margin: 15px 5px;">ログインする</button>
-    <a class="btn btn-primary" style="width:120pt;height:35pt;margin: 15px 5px;" href="{% url 'accounts:signup' %}" role="button">会員登録</a>
+    <a class="btn btn-primary" style="width:120pt;height:35pt;margin: 15px 5px;" href="{% url 'accounts:signup' %}" role="button">ユーザ登録</a>
     </nobr></div>
 
     {% comment %} <a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">会員登録</a> {% endcomment %}

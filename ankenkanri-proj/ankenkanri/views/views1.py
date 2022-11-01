@@ -1,5 +1,6 @@
 # from curses.ascii import isspace
 #import views
+import sys
 from re import S
 from django import forms
 from tkinter.tix import Tree
@@ -30,8 +31,12 @@ from .views3 import searchContextSet
 from .viewsa import dataexport, export2, dataimport, import2
 from .viewsa import edit, edit2
 
-def logIn(request):
-    return render(request, 'registration/login.html')
+def sysExit(request):
+
+    sys.exit()
+
+def terminate(request):
+        return render(request, 'ankenkanri/terminate.html')
 
 def top_menu(request):
     print('user_id =', str(request.user))   ### test code ###
@@ -39,7 +44,7 @@ def top_menu(request):
     #request.session['sessionPassword'] = request.POST.get('password')
     print('user_id =', request.POST.get('username'))
     print('password =', request.POST.get('password'))
-    return render(request, 'ankenkanri/top_menu.html')
+    return redirect('/ankenkanri2/index')
 
 # def logout_view(request):
 #     logout(request)
@@ -65,7 +70,7 @@ def page_n0(request):
         request.session['sessionDisplayCode'] = 'dp11'    
         return render(request, 'ankenkanri/page_n.html', context)
     elif "pageTop" in request.POST: 
-        return render(request, 'ankenkanri/top_menu.html')
+        return redirect('/ankenkanri2/index')
     else:
         request.session['sessionDisplayCode'] = 'dp01'    
         return render(request, 'ankenkanri/page_n0.html', context)     
@@ -192,6 +197,7 @@ def statusCodeCheck(request, selectedStatus):
 def service_start(request):
     if "searchButton" in request.POST:
         q = AnkenList.objects.all()
+        recallParam(request)  ## 検索パラメータが未設定の場合、初期化する
         context = searchContextSet(request, q)    # 検索条件読み出し、設定
         #searchParamResume(request)
         request.session['sessionDisplayCode'] = 'dp200' 
@@ -208,11 +214,18 @@ def service_start(request):
     elif "dataImportButton" in request.POST:
         request.session['sessionDisplayCode'] = 'dp220' 
         return render(request, 'ankenkanri2/import.html')
-    else:  ## 使用方法 usageButton
+    elif "usageButton" in request.POST:
+        return redirect('/ankenkanri2/index')
+    elif "usageButton-2" in request.POST:
         return redirect('/ankenkanri2/index')
 
+    else:  ## "terminateButton" in request.POST:
+        return redirect('/accounts/login/')
+        #return redirect('/ankenkanri/terminate')
 
-## 管理番号入力処理画面
+
+
+## 管理番号入力処理画面でボタンが押された
 def page_n(request):
     print('user_id =', str(request.user))   ### test code ###
     #print('request.session[sessionDisplayCode] =', request.session['sessionDisplayCode'] )
@@ -228,45 +241,45 @@ def page_n(request):
 
         if "pageTop" in request.POST:    ## 「TOPメニュー」検出
                 request.session['sessionDisplayCode'] = 'dp00' 
-                return render(request, 'ankenkanri/top_menu.html')
+                return redirect('/ankenkanri2/index')
 
         # inData = request.POST.get('inputNo')
         # request.session['sessionKanriNo'] = inData
         # request.session['sessionEdaban'] = request.POST.get('edaban')
 
-        if "pageSearch" in request.POST:  ## 暫定ボタン「検索へ飛ぶ」検出
-                q = AnkenList.objects.all()
-                context = searchContextSet(request, q)    # 検索条件読み出し、設定
-                print('L338 =', request.session['sessionTorihikisakiM'] )                
-                print('c1 =', context['c1'])
-                print('c2 =', context['c2'])
-                print('c3 =', context['c3'])
-                print('c4 =', context['c4'])
-                print('c5 =', context['c5'])
-                print('c6 =', context['c6'])
-                print('c7 =', context['c7'])
-                print('c8 =', context['c8'])
-                print('c9 =', context['c9'])
-                print('c10 =', context['c10'])
-                print('c11 =', context['c11'])
-                print('c12 =', context['c12'])
-                print('c13 =', context['c13'])
-                print('c14 =', context['c14'])
-                print('c15 =', context['c15'])
-                print('c16 =', context['c16'])
-                print('c17 =', context['c17'])
-                print('c18 =', context['c18'])
-                print('c19 =', context['c19'])
-                print('c20 =', context['c20'])
-                print('c21 =', context['c21'])
-                print('c22 =', context['c22'])
-                print('c23 =', context['c23'])
-                print('c24 =', context['c24'])
+        # if "pageSearch" in request.POST:  ## 暫定ボタン「検索へ飛ぶ」検出
+        #         q = AnkenList.objects.all()
+        #         context = searchContextSet(request, q)    # 検索条件読み出し、設定
+        #         print('L338 =', request.session['sessionTorihikisakiM'] )                
+        #         print('c1 =', context['c1'])
+        #         print('c2 =', context['c2'])
+        #         print('c3 =', context['c3'])
+        #         print('c4 =', context['c4'])
+        #         print('c5 =', context['c5'])
+        #         print('c6 =', context['c6'])
+        #         print('c7 =', context['c7'])
+        #         print('c8 =', context['c8'])
+        #         print('c9 =', context['c9'])
+        #         print('c10 =', context['c10'])
+        #         print('c11 =', context['c11'])
+        #         print('c12 =', context['c12'])
+        #         print('c13 =', context['c13'])
+        #         print('c14 =', context['c14'])
+        #         print('c15 =', context['c15'])
+        #         print('c16 =', context['c16'])
+        #         print('c17 =', context['c17'])
+        #         print('c18 =', context['c18'])
+        #         print('c19 =', context['c19'])
+        #         print('c20 =', context['c20'])
+        #         print('c21 =', context['c21'])
+        #         print('c22 =', context['c22'])
+        #         print('c23 =', context['c23'])
+        #         print('c24 =', context['c24'])
 
-                #searchParamResume(request)
-                print('L847 =', request.session['sessionTorihikisakiM'] )
-                request.session['sessionDisplayCode'] = 'dp200' 
-                return render(request, 'ankenkanri/search.html', context) 
+        #         #searchParamResume(request)
+        #         print('L847 =', request.session['sessionTorihikisakiM'] )
+        #         request.session['sessionDisplayCode'] = 'dp200' 
+        #         return render(request, 'ankenkanri/search.html', context) 
 
         request.session['sessionKanriNo'] = request.POST.get('kanriNo')   ## dummy ##
         request.session['sessionEdaban'] = request.POST.get('edaban')    ## dummy ##
@@ -287,6 +300,11 @@ def page_n(request):
                 request.session['sessionEdaban'] = None
             else:
                 request.session['sessionEdaban'] = form.cleaned_data.get('edaban')
+                if form.cleaned_data.get('edaban') == '0':
+                    message = '枝番0(親枝番)は対象外です。他の番号を入力願います。'
+                    context = { 'message' : message }
+                    request.session['sessionDisplayCode'] = 'dp02'             
+                    return render(request, 'ankenkanri/number_treat.html', context)                     
         else:
             #print(form.errors)
             message = '入力にエラーが検出されました！再入力願います。'
@@ -351,7 +369,7 @@ def page_n(request):
                 return render(request, 'ankenkanri/page_n.html', context)
         elif "pageTop" in request.POST:
                 request.session['sessionDisplayCode'] = 'dp00' 
-                return render(request, 'ankenkanri/top_menu.html')
+                return redirect('/ankenkanri2/index')
         else:
             return render(request, 'ankenkanri/ankenNyuuryokuKan1.html')
 
@@ -380,7 +398,7 @@ def page_n(request):
                 return render(request, 'ankenkanri/page_n.html', context)
         elif "pageTop" in request.POST:
                 request.session['sessionDisplayCode'] = 'dp00' 
-                return render(request, 'ankenkanri/top_menu.html')
+                return redirect('/ankenkanri2/index')
         else:
             return render(request, 'ankenkanri/mitsumorisyoIraiKan2.html')
     
@@ -393,7 +411,7 @@ def page_n(request):
     #             return render(request, 'ankenkanri/page_n.html', context)
     #     elif "pageTop" in request.POST:
     #             request.session['sessionDisplayCode'] = 'dp00' 
-    #             return render(request, 'ankenkanri/top_menu.html')
+    #             return redirect('/ankenkanri2/index')
     #     else:
     #         return render(request, 'ankenkanri/mitumorisyoNyuusyuKan3.html')
     
@@ -405,7 +423,7 @@ def page_n(request):
         print( "arrived L921 !!")
         if "pageTop" in request.POST:
                 request.session['sessionDisplayCode'] = 'dp00' 
-                return render(request, 'ankenkanri/top_menu.html')
+                return redirect('/ankenkanri2/index')
 
         ## 案件入力完了画面
         if  "ankenNyuuryokuKan1"  in request.POST:  # (クリックしたボタンに応じたHTMLへ分岐させる)

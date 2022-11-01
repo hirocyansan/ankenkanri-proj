@@ -439,7 +439,14 @@ def edit(request):
 def editOperation(request):
     if "returnTopButton" in request.POST:
         request.session['sessionDisplayCode'] = 'dp00' 
-        return render(request, 'ankenkanri2/index.html') 
+        #return redirect('/ankenkanri2/index')
+        kazu = AnkenList.objects.all().count()
+        context = {
+            'ankenList' : AnkenList.objects.order_by('hyojijun'),
+            'kazu' : kazu
+        }
+        request.session['sessionDisplayCode'] = 'dp00' 
+        return render(request,'ankenkanri2/index.html',context)
     else:
         context = contextFormSet(request)
         request.session['sessionDisplayCode'] = 'dp231'   

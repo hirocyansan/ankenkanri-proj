@@ -4,12 +4,12 @@
 
 {% block content %}
 
-<div class="card bg-light mb-3" style="max-width: 600pt;">
+<div class="card bg-light mb-3" style="max-width: 600pt; margin-top: 10px; margin-left: 10px;">
   <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>管理番号入力処理</h3></div></div>
   <div class="card-body">
     <h5 class="card-title"></h5>
     <nobr>
-    <p class="card-text">管理番号を入力して「確定」を押してください。: <h5 style="color:red;"><b>{{ message }}</b></h5>
+    <p class="card-text">管理番号、枝番を入力して「確定」を押してください。 <h5 style="color:red;"><b>{{ message }}</b></h5>
     </nobr><nobr>
         {% comment %} <form action="/ankenkanri/kanriNoCheck" method="POST">{% csrf_token %} {% endcomment %}
         <form action="/ankenkanri/page_n" method="POST">{% csrf_token %}        
@@ -21,7 +21,7 @@
           {% comment %} <button class="btn btn-primary" type="submit" name="pageTop" style="width:120pt;height:35pt;margin: 5px 5px;"> TOPへ戻る</button> &nbsp;&nbsp;  {% endcomment %}
           <button class="btn btn-primary" type="submit" name="pageTop" style="width:120pt;height:35pt;margin: 5px 5px;"> TOPへ戻る</button>
 
-          <button class="btn btn-info" type="submit" name="pageSearch" style="width:120pt;height:35pt;margin: 5px 5px;"> 検索へ飛ぶ</button>
+          {% comment %} <button class="btn btn-info" type="submit" name="pageSearch" style="width:120pt;height:35pt;margin: 5px 5px;"> 検索へ飛ぶ</button> {% endcomment %}
           </div>
           </nobr></span> 
         </form>

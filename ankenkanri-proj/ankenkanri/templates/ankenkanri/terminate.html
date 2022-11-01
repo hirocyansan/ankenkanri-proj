@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title%}案件入力完了{% endblock %}
+
+{% block content %}
+
+{% comment %} <div class="card bg-light mb-3" style="max-width:600pt;">
+  <div class="card-header" ><div class="p-3 mb-2 bg-info text-white"><h3>現状の進捗</h3></div></div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+      <p class="card-text">
+        <h6>
+        {% for obj in q %}
+            {% if obj.keiriShonin == False %}
+               <div style="color: #3B3838"><li><bold><font size="5">選択中の案件番号＝{{ obj.kanriNo }} 枝番＝{{ obj.edaban }}</bold></br><font size="3">（ステータス＝{{ obj.status }}、コード＝{{ obj.statusCode }}、<font style="color:red;"><b>経理承認＝{{ obj.keiriShonin}}</b></font>、支払パターン＝{{ obj.shiharaiPattern }}、案件名＝{{ obj.ankenMei }}）
+               </font></font></li></div>
+            {% else %}
+               <div style="color: #3B3838"><li><bold><font size="5">選択中の案件番号＝{{ obj.kanriNo }} 枝番＝{{ obj.edaban }}</bold></br><font size="3">（ステータス＝{{ obj.status }}、コード＝{{ obj.statusCode }}、経理承認＝{{ obj.keiriShonin}}、支払パターン＝{{ obj.shiharaiPattern }}、案件名＝{{ obj.ankenMei }}）
+               </font></font></li></div>
+            {% endif %}
+        {% endfor %}
+        </h6>
+      </p>
+  </div>
+</div> {% endcomment %}
+
+{% comment %} <div class="card bg-light mb-3" style="max-width: 600pt;">
+  <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>現状の進捗</h3></div></div>
+  <div class="card-body">
+    <h5 class="card-title">選択したテーマ</h5>
+    <p class="card-text">
+   <h6>
+        {% for obj in q %}
+            {% if obj.keiriShonin == False %}
+              （案件番号＝{{ obj.kanriNo }}、枝番＝{{ obj.edaban }}、ステータス＝{{ obj.status }}、コード＝{{ obj.statusCode }}、<font style="color:red;"><b>経理承認＝{{ obj.keiriShonin}}</b></font>、支払パターン＝{{ obj.shiharaiPattern }}、案件名＝{{ obj.ankenMei }}）
+            {% else %}
+              （案件番号＝{{ obj.kanriNo }}、ステータス＝{{ obj.status }}、コード＝{{ obj.statusCode }}、経理承認＝{{ obj.keiriShonin}}、支払パターン＝{{ obj.shiharaiPattern }}、案件名＝{{ obj.ankenMei }}）
+            {% endif %}
+        {% endfor %}
+    </h6>    
+    </p>
+  </div>
+</div> {% endcomment %}
+
+
+<div class="alert alert-primary" role="alert" style="width:200pt;height:50pt;margin: 5px 5px;"><strong><h4>お疲れさまでした。</h4></strong> </div>
+
+{% comment %} <div class="card" style="width:600pt;height:200pt;margin: 5px 5px;">
+  <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>お疲れさまでした。</h3></div></div>
+  <div class="card-body">
+  <form action="/ankenkanri/logIn/" method="POST">{% csrf_token %}
+    <nobr>
+    <h5 class="card-title"><b><font style="color:blue;">「開始する」</font></b>でログイン画面に移ります。</h5>
+    <p class="card-text"></p>
+      <div style="text-align: center;">
+      <button class="btn btn-primary" type="submit" name="startLogin" style="width:120pt;height:35pt;margin: 5px 5px;"> 開始する</button>
+    </nobr></div>
+    </div></form>
+  </div>
+</div> {% endcomment %}
+
+  {% comment %} <div>
+    <br><br><br>
+    <ul><h3 style=color:#3B3838><li>案件入力完了の処理です。</ul></h3></li>
+  </div>
+  <body>
+    <h5 style=color:#3B3838 ><b>※ 案件入力完了</b></h5>
+      <!-- <div class="alert alert-primary" role="alert"> -->
+      <nobr>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <form action="/ankenkanri/" method="POST">{% csrf_token %}
+          <button class="btn btn-primary" type="submit" name="page_n" style="width:120pt;height:35pt;margin: 5px 5px;"> 選択画面へ戻る</button> &nbsp;&nbsp; 
+          <a href="rtn-top" class="btn btn-primary"  style="width:120pt;height:35pt;margin: 5px 5px;">TOPへ戻る</a></span></nobr> 
+        </form>
+        </div>
+      </div>
+    </div>
+  </body> {% endcomment %}
+
+
+{% endblock content %}

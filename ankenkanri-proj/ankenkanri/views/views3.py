@@ -1,4 +1,5 @@
 # from curses.ascii import isspace
+import re
 from re import S
 from django import forms
 from tkinter.tix import Tree
@@ -237,28 +238,40 @@ def searchExec(request):
         if (request.POST.get('kanriNoE') is None) or (request.POST.get('kanriNoE') == ""):
            pass
         else:
-            q1 = request.POST.get('kanriNoE').split('、')
+            q1 = request.POST.get('kanriNoE')
+            q1 = q1.replace(' ',';').replace('　',';')    ## 半角、全角ブランク→;へ変換
+            q1 = re.split('[,;、]', q1)     ## セパレート文字列(,;、)で分離してLISTへ
         if (request.POST.get('ankenM') is None) or (request.POST.get('ankenM') == ""):
             pass
         else:
-            q2 = request.POST.get('ankenM').split('、')
+            q2 = request.POST.get('ankenM')
+            q2 = q2.replace(' ',';').replace('　',';')    ## 半角、全角ブランク→;へ変換
+            q2 = re.split('[,;、]', q2)
 #        print('L204 =', request.session['sessionTorihikisakiM'] )
         if (request.POST.get('torihikisakiM') is None) or (request.POST.get('torihikisakiM') == ""):
             pass
         else:
-            q3 = request.POST.get('torihikisakiM').split('、')
+            q3 = request.POST.get('torihikisakiM')
+            q3 = q3.replace(' ',';').replace('　',';')    ## 半角、全角ブランク→;へ変換
+            q3 = re.split('[,;、]', q3)
         if (request.POST.get('konyuG') is None) or (request.POST.get('konyuG') == ""):
             pass
         else:
-            q4 = request.POST.get('konyuG').split('、')
+            q4 = request.POST.get('konyuG')
+            q4 = q4.replace(' ',';').replace('　',';')    ## 半角、全角ブランク→;へ変換
+            q4 = re.split('[,;、]', q4)
         if (request.POST.get('tantoshaM') is None) or (request.POST.get('tantoshaM') == ""):
             pass
         else:
-            q5 = request.POST.get('tantoshaM').split('、')
+            q5 = request.POST.get('tantoshaM')
+            q5 = q5.replace(' ',';').replace('　',';')    ## 半角、全角ブランク→;へ変換
+            q5 = re.split('[,;、]', q5)
         if (request.POST.get('saisyuH') is None) or (request.POST.get('saisyuH') == ""):
             pass
         else:
-            q6 = request.POST.get('saisyuH').split('、') 
+            q6 = request.POST.get('saisyuH')
+            q6 = q6.replace(' ',';').replace('　',';')    ## 半角、全角ブランク→;へ変換
+            q6 = re.split('[,;、]', q6)
 
    ## リストの要素にNullがあれば削除する。
     q1 = nullDelete(q1) 
