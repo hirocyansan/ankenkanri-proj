@@ -1,8 +1,18 @@
 from django import forms
 from django.core import validators
 from .models import AnkenList
+# from django.contrib.auth.forms import SetPasswordForm
 
 
+# class MySetPasswordForm(SetPasswordForm):
+
+#     # テンプレートにおいて表示されるinputタグのカスタマイズは以下のように行う（下は一例）
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.fields['new_password1'].widget.attrs['class'] = 'form-control'# classの指定
+#         self.fields['new_password2'].widget.attrs['class'] = 'form-control'
+#         self.fields['new_password1'].widget.attrs['placeholder'] = '半角英数字８文字以上'# placeholderの指定
+#         self.fields['new_password2'].widget.attrs['placeholder'] = 'パスワード確認用'
 
 class kanriNoForm(forms.Form):
     kanriNo = forms.CharField()

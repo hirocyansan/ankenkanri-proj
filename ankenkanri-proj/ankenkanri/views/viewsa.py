@@ -435,6 +435,7 @@ def edit(request):
                                               : AnkenList.objects.order_by('hyojijun'),'kazu':kazu}
     )
 
+
 ## 編集画面表示中にボタンが押された
 def editOperation(request):
     if "returnTopButton" in request.POST:
@@ -448,10 +449,7 @@ def editOperation(request):
         request.session['sessionDisplayCode'] = 'dp00' 
         return render(request,'ankenkanri2/index.html',context)
     else:
-        context = contextFormSet(request)
-        request.session['sessionDisplayCode'] = 'dp231'   
-        return render('ankenkanri2/edit2.html',context)
-
+        #context = contextFormSet(request)
         kazu = AnkenList.objects.all().count()
         if request.method == 'POST':
             form = forms.formAnkenList()
@@ -541,6 +539,11 @@ def editOperation(request):
             request,'ankenkanri2/edit2.html', {'checkType':checkType,'form':form,'ankenList' \
                         : AnkenList.objects.filter(id__in=list(map(int, checkBoxValue))),'kazu':kazu}
         )
+
+        request.session['sessionDisplayCode'] = 'dp231'   
+        return render('ankenkanri2/edit2.html',context)
+
+
 
 def contextFormSet(request):
     kazu = AnkenList.objects.all().count()

@@ -26,7 +26,7 @@ c10={{ c10 }} {% endcomment %}
 
     <form action="/ankenkanri/searchExec" method="POST">{% csrf_token %}
       <nobr>
-        <div class="alert alert-info" role="alert" style="width:560pt;height:45pt;margin: 5px 5px;">
+        <div class="alert alert-info" role="alert" style="width:560pt;height:55pt;margin: 5px 5px;">
           以下の検索条件入力後、検索 →
           <button class="btn btn-primary" type="submit" name="searchStart" style="width:100pt;height:30pt;margin: 5px 5px;"> スタート！</button> &nbsp;&nbsp; 
           以下の検索条件を →
@@ -100,7 +100,7 @@ c10={{ c10 }} {% endcomment %}
       </div> {% endcomment %}
 
 {% comment %} ## 表示　昇順/降順 {% endcomment %}
-    <div class="alert alert-info" role="alert" style="width:560pt;height:35pt;margin: 5px 5px;">
+    <div class="alert alert-info" role="alert" style="width:560pt;height:45pt;margin: 5px 5px;">
       並べ替えルール&ensp;：<div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="orderRule" id="inlineRadio1" value="orderAsc" {{ c3 }}>
         <label class="form-check-label" for="inlineRadio1">昇順</label>
@@ -113,7 +113,7 @@ c10={{ c10 }} {% endcomment %}
 
 {% comment %} ## 経理部承認　選択 {% endcomment %}
     <nobr>
-    <div class="alert alert-info" role="alert" style="width:560pt;height:35pt;margin: 5px 5px;">
+    <div class="alert alert-info" role="alert" style="width:560pt;height:45pt;margin: 5px 5px;">
         経理部承認&ensp;&ensp;&ensp;：
         {% comment %} <div class="form-check form-check-inline">
           <input class="form-check-input" type="checkbox" name="keiriYN" id="inlineCheckbox1" value="yesNo" {{ c5 }}>
@@ -132,7 +132,7 @@ c10={{ c10 }} {% endcomment %}
 
 {% comment %} ## 案件ステータス　選択 {% endcomment %}
     <nobr>
-    <div class="alert alert-info" role="alert" style="width:560pt;height:35pt;margin: 5px 5px;">
+    <div class="alert alert-info" role="alert" style="width:560pt;height:45pt;margin: 5px 5px;">
       案件ステータス&ensp;&thinsp;：
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox1" value="案件入力中" {{ c7 }}>
@@ -151,7 +151,7 @@ c10={{ c10 }} {% endcomment %}
         <label class="form-check-label" for="inlinecheckbox4">見積書入手済</label>
       </div>
     </div>
-    <div class="alert alert-info" role="alert" style="width:560pt;height:35pt;margin: 5px 5px;">
+    <div class="alert alert-info" role="alert" style="width:560pt;height:45pt;margin: 5px 5px;">
       (任意数選択)&ensp;&ensp;：<div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" name="statusL" id="inlinecheckbox5" value="稟議書承認完了" {{ c11 }}>
         <label class="form-check-label" for="inlinecheckbox5">稟議書承認完了</label>
@@ -185,39 +185,40 @@ c10={{ c10 }} {% endcomment %}
     </div>
     </nobr>
 
-{% comment %} ## kannriNo.、枝番 {% endcomment %}
+<p>対象案件の検索条件を入力</p>
+{% comment %} ## kannriNo.、{% endcomment %}
     <nobr>
-      <span class="input-group-text" id="basic-addon1">管理No.&emsp;&emsp;&emsp;：
+      <span class="input-group-text" id="basic-addon1" style="width:560pt;height:45pt;margin: 5px 5px;">管理No.&emsp;&emsp;&emsp;：
       <input type="text"  name="kanriNoE" class="form-control" placeholder="英数字のみ" aria-label="Username" aria-describedby="basic-addon1" value={{ c19 }}> 
     </nobr>
 
 {% comment %} ## 案件名　 {% endcomment %}
     <nobr>
-      <span class="input-group-text" id="basic-addon1">案件名　　　 ：&nbsp;
+      <span class="input-group-text" id="basic-addon1" style="width:560pt;height:45pt;margin: 5px 5px;">案件名　　　 ：&nbsp;
       <input type="text"  name="ankenM" class="form-control" placeholder="最大30文字" aria-label="Username" aria-describedby="basic-addon1" value={{ c20 }}> 
     </nobr>
 
 {% comment %} ## 取引先名 {% endcomment %}
     <nobr>
-      <span class="input-group-text" id="basic-addon1">取引先名　　 ：&nbsp;
+      <span class="input-group-text" id="basic-addon1" style="width:560pt;height:45pt;margin: 5px 5px;">取引先名　　 ：&nbsp;
       <input type="text"  name="torihikisakiM" class="form-control" placeholder="最大30文字" aria-label="Username" aria-describedby="basic-addon1" value={{ c21 }}> 
     </nobr>
 
 {% comment %} ## 購入会社 {% endcomment %}
     <nobr>
-      <span class="input-group-text" id="basic-addon1">購入会社　　 ：&nbsp;
+      <span class="input-group-text" id="basic-addon1" style="width:560pt;height:45pt;margin: 5px 5px;">購入会社　　 ：&nbsp;
       <input type="text"  name="konyuG" class="form-control" placeholder="最大30文字" aria-label="Username" aria-describedby="basic-addon1" value={{ c22 }}> 
     </nobr>
 
 {% comment %} ## 担当者名 {% endcomment %}
     <nobr>
-      <span class="input-group-text" id="basic-addon1">担当者名　　 ：&nbsp;
+      <span class="input-group-text" id="basic-addon1" style="width:560pt;height:45pt;margin: 5px 5px;">担当者名　　 ：&nbsp;
       <input type="text"  name="tantoshaM" class="form-control" placeholder="最大30文字" aria-label="Username" aria-describedby="basic-addon1" value={{ c23 }}> 
     </nobr>
 
 {% comment %} ## 最終編集者 {% endcomment %}
     <nobr>
-      <span class="input-group-text" id="basic-addon1">最終編集者　 ：&nbsp;
+      <span class="input-group-text" id="basic-addon1" style="width:560pt;height:45pt;margin: 5px 5px;">最終編集者　 ：&nbsp;
       <input type="text"  name="saisyuH" class="form-control" placeholder="最大30文字" aria-label="Username" aria-describedby="basic-addon1" value={{ c24 }}> 
     </nobr> 
 

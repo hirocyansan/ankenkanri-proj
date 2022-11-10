@@ -10,6 +10,7 @@ from .views import viewsa
 urlpatterns = [
 #    path('logout/', views1.logout_view, name='logout'),  
 #    path('ankenkanri/logIn/', views1.logIn, name='logIn'), 
+
     path('ankenkanri/number_treat/', views1.number_treat, name='number_treat'),    
     path('ankenkanri/page_n/', views1.page_n, name='page_n'), 
     path('ankenkanri/page_n0/', views1.page_n0, name='page_n0'),
@@ -17,6 +18,9 @@ urlpatterns = [
     
     path('ankenkanri/search/', views3.search, name='search'),
     path('ankenkanri/searchExec', views3.searchExec, name='searchExec'),
+
+    path('ankenkanri/variousSettings/', views1.variousSettings, name='variousSettings'),  
+#    path('ankenkanri/changePasswordPost/', views1.changePasswordPost, name='changePasswordPost'),  
 
     path('ankenkanri/views1/', views1.initialStart, name='initialStart'),
     path('ankenkanri/page_n', views1.page_n, name='page_n'),

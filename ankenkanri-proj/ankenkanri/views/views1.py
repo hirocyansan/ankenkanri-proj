@@ -7,9 +7,18 @@ from tkinter.tix import Tree
 from django.shortcuts import redirect, render
 
 #from symbol import pass_stmt
-#from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, get_user_model
+User = get_user_model()
 #from django.http import HttpResponse
 from .. import forms
+
+#from ..models import User  #追加
+
+#from ..forms import MySetPasswordForm   ##追加
+
+#from ..forms import MySetPasswordForm
+
+from django.urls import reverse
 
 from django.views.generic import TemplateView
 from ..models import AnkenList, AnkenStatus
@@ -206,23 +215,61 @@ def service_start(request):
         request.session['sessionDisplayCode'] = 'dp02' 
         return render(request, 'ankenkanri/number_treat.html')
     elif "dataEditButton" in request.POST:
-        request.session['sessionDisplayCode'] = 'dp230' 
-        return render(request, 'ankenkanri2/edit.html')
+        form = forms.formAnkenList()
+        kazu = AnkenList.objects.all().count()  
+        request.session['sessionDisplayCode'] = 'dp230'   
+        return render(
+            request,'ankenkanri2/edit.html',context={'form':form,'ankenList' \
+                                                : AnkenList.objects.order_by('hyojijun'),'kazu':kazu}
+        )
     elif "dataExportButton" in request.POST:
         request.session['sessionDisplayCode'] = 'dp210' 
         return render(request, 'ankenkanri2/export.html')
     elif "dataImportButton" in request.POST:
         request.session['sessionDisplayCode'] = 'dp220' 
         return render(request, 'ankenkanri2/import.html')
+    elif "variousSettingsButton" in request.POST:
+        request.session['sessionDisplayCode'] = 'dp240' 
+        return render(request, 'ankenkanri/variousSettings.html')
     elif "usageButton" in request.POST:
-        return redirect('/ankenkanri2/index')
-    elif "usageButton-2" in request.POST:
         return redirect('/ankenkanri2/index')
 
     else:  ## "terminateButton" in request.POST:
+        logout(request)
         return redirect('/accounts/login/')
         #return redirect('/ankenkanri/terminate')
 
+## 各種設定画面表示中にボタンが押された
+def variousSettings(request):
+    if "changeSettings" in request.POST:
+        request.session['sessionDisplayCode'] = 'dp240' 
+        return redirect('/ankenkanri2/index')   ###  暫定的にTOP画面に戻す
+    elif "changePassword" in request.POST:
+        request.session['sessionDisplayCode'] = 'dp250' 
+        return redirect('/accounts/password_change')
+        #return render(request, 'ankenkanri/changePassword.html')   
+    else:  ## "pageTop" in request.POST:
+        return redirect('/ankenkanri2/index')   
+
+# # パスワード変更フォームを表示する処理
+# def changePassword(request):
+#     template_name = 'changePassword.html'
+#     form = MySetPasswordForm(user=request.user)
+#     context = {
+#         'form': form,
+#     }
+#     return render(request, template_name, context)
+
+
+# # パスワードの変更を保存する処理
+# def changePasswordPost(request):
+#     if request.method == 'POST':
+#         form = MySetPasswordForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#     request.session['sessionDisplayCode'] = 'dp00' 
+#     return redirect('/ankenkanri2/index')
+#     #return render(request, '/ankenkanri2/index.html', context)
 
 
 ## 管理番号入力処理画面でボタンが押された

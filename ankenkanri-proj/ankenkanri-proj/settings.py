@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'ankenkanri.apps.AnkenkanriConfig',
 #    'django_boost',    # for special forloop
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
