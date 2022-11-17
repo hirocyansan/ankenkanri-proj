@@ -21,7 +21,7 @@ c10={{ c10 }} {% endcomment %}
   <div class="card-body">
     <h5 class="card-title"></h5>
     <nobr>
-    <p class="card-text">検索条件を入力して「スタート」ボタンを押してください。:
+    <p class="card-text"><font size="4">検索条件、絞込み条件を設定して「スタート！」ボタンをクリックしてください。:</font>
 
 
     <form action="/ankenkanri/searchExec" method="POST">{% csrf_token %}
@@ -33,6 +33,7 @@ c10={{ c10 }} {% endcomment %}
           <button class="btn btn-primary" type="submit" name="dataClear" style="width:100pt;height:30pt;margin: 5px 5px;"> クリア</button> &nbsp;&nbsp; 
         </div>
       </nobr>
+      <p><font size="4">■検索条件</font></p>
       <nobr>
       <div class="alert alert-info" role="alert" style="width:560pt;height:45pt;margin: 5px 5px;">
         検索タイプ　　：
@@ -185,7 +186,7 @@ c10={{ c10 }} {% endcomment %}
     </div>
     </nobr>
 
-<p>対象案件の検索条件を入力</p>
+<p><font size="4">■対象案件絞込み条件</font> <font size="2">[区切り記号：半角/全角ブランク、半角/全角カンマ]</font></p>
 {% comment %} ## kannriNo.、{% endcomment %}
     <nobr>
       <span class="input-group-text" id="basic-addon1" style="width:560pt;height:45pt;margin: 5px 5px;">管理No.&emsp;&emsp;&emsp;：
@@ -222,6 +223,7 @@ c10={{ c10 }} {% endcomment %}
       <input type="text"  name="saisyuH" class="form-control" placeholder="最大30文字" aria-label="Username" aria-describedby="basic-addon1" value={{ c24 }}> 
     </nobr> 
 
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
   crossorigin="anonymous">
@@ -234,6 +236,7 @@ https://mseeeen.msen.jp/bootstrap-4-dropdown-list/　 {% endcomment %}
           });
       });
 </script>
+
   
 {% comment %} ドロップダウンリストの表面に選択項目を表示
 

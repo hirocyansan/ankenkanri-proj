@@ -461,7 +461,7 @@ def yosanShokaCheck():
                 edaban0Row.nohinGokei = edaban0Row.nohinGokei + ankenListRow.nohinGokei
                 edaban0Row.konyuGokei = edaban0Row.konyuGokei + ankenListRow.konyuGokei
         AnkenList.objects.filter(edaban=0).filter(kanriNo=edaban0Row.kanriNo).update(
-            keikakuGokei = edaban0Row.keikakuGokei,
+            #keikakuGokei = edaban0Row.keikakuGokei,  ## ユーザが計画合計値を入力するため不要
             mitsumoriGokei = edaban0Row.mitsumoriGokei,
             chumonGokei = edaban0Row.chumonGokei,
             nohinGokei = edaban0Row.nohinGokei,
