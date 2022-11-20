@@ -5,7 +5,9 @@
 
 {% block content %}
 
-<div class="card bg-light mb-3" style="max-width:850pt;">
+{% include 'ankenkanri/statusDisplayAll.html' %}
+
+{% comment %} <div class="card bg-light mb-3" style="max-width:850pt;">
   <div class="card-header" ><div class="p-3 mb-2 bg-info text-white"><h3>現状の進捗</h3></div></div>
   <div class="card-body">
     <h5 class="card-title"></h5>
@@ -37,7 +39,8 @@
         {% endfor %}
   </div>
   </div>
-</div>
+</div> {% endcomment %}
+
 <div class="card bg-light mb-3" style="max-width:850pt;">
   <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>終了済み処理を選択してください。</h3></div></div>
   <div class="card-body">
@@ -49,6 +52,9 @@
             {% comment %} {% for i, j in buttonName|zip:buttonName2 %} {% endcomment %}
               {% for j, i in buttonName0.items %}
                 {% if forloop.counter <= buttonGray %}  
+                 <!-- DEBUGモードを解除して、グレーボタンを無効にするには、↓の行を有効化する-->
+                        {% comment %} <button class="btn btn-secondary" type="submit" name="{{ j }}" disabled style="font-size:20px;width:250pt;height:35pt;margin: 5px 5px;">{{ i }}</button> {% endcomment %}
+
                         <button class="btn btn-secondary" type="submit" name="{{ j }}" style="font-size:20px;width:250pt;height:35pt;margin: 5px 5px;">{{ i }}</button>
                     {% if forloop.counter == 3 %} </br> {% endif %}
                     {% if forloop.counter == 6 %} </br> {% endif %}

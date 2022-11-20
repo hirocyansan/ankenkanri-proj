@@ -23,14 +23,6 @@ from ..models import AnkenTorihikisaki
 from ..models import AnkenTantosha
 from ..models import AnkenKanjokamoku
 
-##from views1.contextSet import *
-
-
-def testContextSet(request):
-    inData = 'S22-009'
-    edaBan = '1'
-    context = 'views.contextSet'(inData, edaBan)
-    return render(request, 'ankenkanri/page_n.html', context)
 
 # Create your views here.
 
