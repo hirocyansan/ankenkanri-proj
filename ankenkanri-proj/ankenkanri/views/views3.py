@@ -155,7 +155,7 @@ def search(request):
 def nullDelete(q):
     qo = []
     for row in q:
-        if (row is None) or (row == ""):
+        if row is None:
             continue
         else:
             qo.append(row)
@@ -379,6 +379,8 @@ def searchExec(request):
     # return render(request, 'ankenkanri/searchResult.html', context)
     return render(
         request,'ankenkanri2/edit.html',context={'form':form,'ankenList' : q,'kazu':kazu}
+
+        
     )    
 
 def searchParamResume(request):

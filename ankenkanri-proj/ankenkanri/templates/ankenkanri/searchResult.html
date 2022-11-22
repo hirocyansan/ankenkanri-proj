@@ -46,127 +46,104 @@
 
     
     <body>
-        <div style="height:290px; width:1250px; margin-left: 10px; overflow:scroll" class="anken-table">
-        
-            <table >
+        <div style="height:300px; width:1280px; overflow:scroll" class="anken-table">
+            <table>
                     <tr>
-                        <th nowrat style="text-align: center;" >id</th>
-                        <th nowrat style="text-align: center;" >経理承認</th>
-                        <th nowrat style="text-align: center;" >ステータスコード</th>
-                        <th nowrat  style="text-align: center;">案件ステータス</th>
-                        <th nowrat style="text-align: center;" >枝番グループ</th>
-                        <th nowrat style="text-align: center;" >支払パターン</th>
-                        <th nowrat style="text-align: center;" >管理No.</th>
-                        <th nowrat style="text-align: center;" >枝番</th>
-                        <th nowrat style="text-align: center;" >案件名</th>
-                        <th nowrat style="text-align: center;" >取引先コード</th>
-                        <th nowrat style="text-align: center;" >取引先名</th>
-                        <th nowrat style="text-align: center;" >勘定科目コード</th>
-                        <th nowrat style="text-align: center;" >勘定科目</th>
-                        <th nowrat style="text-align: center;" >計画単価</th>
-                        <th nowrat style="text-align: center;" >計画数</th>
-                        <th nowrat style="text-align: center;" >計画合計金額</th>
-                        <th nowrat style="text-align: center;" >見積単価</th>
-                        <th nowrat style="text-align: center;" >見積数</th>
-                        <th nowrat style="text-align: center;" >見積合計金額</th>
-                        <th nowrat style="text-align: center;" >見積書リンク</th>
-                        <th nowrat style="text-align: center;" >稟議書単価</th>
-                        <th nowrat style="text-align: center;" >稟議書数</th>
-                        <th nowrat style="text-align: center;" >稟議書合計</th>
-                        <th nowrat style="text-align: center;" >稟議書No.</th>
-                        <th nowrat style="text-align: center;" >稟議書リンク</th>
-                        <th nowrat style="text-align: center;" >ワークフローNo.</th>
-                        <th nowrat style="text-align: center;" >契約金額</th>
-                        <th nowrat style="text-align: center;" >契約書No.</th>
-                        <th nowrat style="text-align: center;" >契約書リンク</th>
-                        <th nowrat style="text-align: center;" >押捺稟議No.</th>
-                        <th nowrat style="text-align: center;" >押捺稟議リンク</th>
-                        <th nowrat style="text-align: center;" >注文単価</th>
-                        <th nowrat style="text-align: center;" >注文数</th>
-                        <th nowrat style="text-align: center;" >注文合計金額</th>
-                        <th nowrat style="text-align: center;" >注文書リンク</th>
-                        <th nowrat style="text-align: center;" >納品日期限</th>
-                        <th nowrat style="text-align: center;" >支払日期限</th>
-                        <th nowrat style="text-align: center;" >納品単価</th>
-                        <th nowrat style="text-align: center;" >納品数</th>
-                        <th nowrat style="text-align: center;" >納品合計金額</th>
-                        <th nowrat style="text-align: center;" >納品書リンク</th>
-                        <th nowrat style="text-align: center;" >支払単価</th>
-                        <th nowrat style="text-align: center;" >購入数</th>
-                        <th nowrat style="text-align: center;" >購入合計金額</th>
-                        <th nowrat style="text-align: center;" >請求書リンク情報</th>
-                        <th nowrat style="text-align: center;" >計画－実績</th>
-                        <th nowrat style="text-align: center;" >支払繰返し期限</th>
-                        <th nowrat style="text-align: center;" >購入会社</th>
-                        <th nowrat style="text-align: center;" >最終データ更新日</th>
-                        <th nowrat style="text-align: center;" >最終更新者</th>
-                        <th nowrat style="text-align: center;" >社員番号</th>
-                        <th nowrat style="text-align: center;" >担当者名</th>
-                        <th nowrat style="text-align: center;" >コメント</th>
-                        <th nowrat style="text-align: center;">表示順</th>
-
-
+                        <th nowrap >id</th>
+                        <th nowrap >経理承認</th>
+                        <th nowrap >ステータスコード</th>
+                        <th nowrap class="noRap">案件ステータス</th>
+                        <th nowrap >枝番グループ</th>
+                        <th nowrap >支払パターン</th>
+                        <th nowrap class="noRap">管理No.</th>
+                        <th nowrap >枝番</th>
+                        <th nowrap class="noRap">案件名</th>
+                        <th nowrap >取引先コード</th>
+                        <th nowrap class="noRap">取引先名</th>
+                        <th nowrap >勘定科目</th>
+                        <th nowrap >計画単価A</th>
+                        <th nowrap >計画数B</th>
+                        <th nowrap >計画合計金額<br>税込C=A×B</th>
+                        <th nowrap >見積単価D</th>
+                        <th nowrap >見積数E</th>
+                        <th nowrap >見積合計金額<br>税込F=D×E</th>
+                        <th nowrap >見積書リンク</th>
+                        <th nowrap >wfNo</th>
+                        <th nowrap >契約金額</th>
+                        <th nowrap >注文単価G</th>
+                        <th nowrap >注文数H</th>
+                        <th nowrap >注文合計金額<br>税込I=G×H</th>
+                        <th nowrap >注文書リンク</th>
+                        <th nowrap >納品単価J</th>
+                        <th nowrap >納品数K</th>
+                        <th nowrap >納品合計金額<br>税込L=J×K</th>
+                        <th nowrap >支払単価M</th>
+                        <th nowrap >購入数N</th>
+                        <th nowrap >購入合計金額<br>税込O=M×N</th>
+                        <th nowrap >請求書リンク</th>
+                        <th nowrap >計画－実績<br>G=C-O</th>
+                        <th nowrap >納品日期限</th>
+                        <th nowrap >検収日期限</th>
+                        <th nowrap >支払日期限</th>
+                        <th nowrap >支払繰返し期限</th>
+                        <th nowrap >関連稟議書</th>
+                        <th nowrap >契約書</th>
+                        <th nowrap >購入会社</th>
+                        <th nowrap >最終データ更新日</th>
+                        <th nowrap >最終更新者</th>
+                        <th nowrap >社員番号</th>
+                        <th nowrap >担当者名</th>
+                        <th nowrap >コメント</th>
                     </tr>
 
-                    {% for anken in ankenList %}
-                <div >
-                <tr >
-                    <th nowrat id =id{{anken.hyojijun}} style="text-align: center;">{{anken.id | default:"－" }}</th>
-                    <td nowrat id =keiriShonin{{anken.hyojijun}} style="text-align: center;">{{anken.keiriShonin | default:"－" }}</td>
-                    <td nowrat id =statusCode{{anken.hyojijun}} style="text-align: center;">{{anken.statusCode | default:"－" }}</td>
-                    <td nowrat id =status{{anken.hyojijun}} style="text-align: center;">{{anken.status | default:"－" }}</td>
-                    <td nowrat id =edabanGroup{{anken.hyojijun}} style="text-align: center;">{{anken.edabanGroup | default:"－" }}</td>
-                    <td nowrat id =shiharaiPattern{{anken.hyojijun}} style="text-align: center;">{{anken.shiharaiPattern | default:"－" }}</td>
-                    <td nowrat id =kanriNo{{anken.hyojijun}} style="text-align: center;">{{anken.kanriNo | default:"－" }}</td>
-                    <td nowrat id =edaban{{anken.hyojijun}} style="text-align: center;">{{anken.edaban | default:"－" }}</td>
-                    <td nowrat id =ankenMei{{anken.hyojijun}} style="text-align: center;">{{anken.ankenMei | default:"－" }}</td>
-                    <td nowrat id =torihikisakiCode{{anken.hyojijun}} style="text-align: center;">{{anken.torihikisakiCode | default:"－" }}</td>
-                    <td nowrat id =torihikisakiMei{{anken.hyojijun}} style="text-align: center;">{{anken.torihikisakiMei | default:"－" }}</td>
-                    <td nowrat id =kanjokamokuCode{{anken.hyojijun}} style="text-align: center;">{{anken.kanjokamokuCode | default:"－" }}</td>
-                    <td nowrat id =kanjokamoku{{anken.hyojijun}} style="text-align: center;">{{anken.kanjokamoku | default:"－" }}</td>
-                    <td nowrat id =keikakuTanka{{anken.hyojijun}} style="text-align: right;">{{anken.keikakuTanka |default:"－" | intcomma:False }}</td>
-                    <td nowrat id =keikakuSuu{{anken.hyojijun}} style="text-align: right;">{{anken.keikakuSuu |default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =keikakuGokei{{anken.hyojijun}} style="text-align: right;">{{anken.keikakuGokei |default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =mitsumoriTanka{{anken.hyojijun}} style="text-align: right;">{{anken.mitsumoriTanka|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =mitsumoriSuu{{anken.hyojijun}} style="text-align: right;">{{anken.mitsumoriSuu|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =mitsumoriGokei{{anken.hyojijun}} style="text-align: right;">{{anken.mitsumoriGokei|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =mitsumoriLink{{anken.hyojijun}} style="text-align: center;">{{anken.mitsumoriLink | default:"－" }}</td>
-                    <td nowrat id =ringiTanka{{anken.hyojijun}} style="text-align: right;">{{anken.ringiTanka|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =ringiSuu{{anken.hyojijun}} style="text-align: right;">{{anken.ringiSuu|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =ringiGokei{{anken.hyojijun}} style="text-align: right;">{{anken.ringiGokei|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =ringishoNo{{anken.hyojijun}} style="text-align: center;">{{anken.ringishoNo | default:"－" }}</td>
-                    <td nowrat id =ringishoLink{{anken.hyojijun}} style="text-align: center;">{{anken.ringishoLink | default:"－" }}</td>
-                    <td nowrat id =wfNo{{anken.hyojijun}} style="text-align: center;">{{anken.wfNo | default:"－" }}</td>
-                    <td nowrat id =keiyakuKingaku{{anken.hyojijun}} style="text-align: right;">{{anken.keiyakuKingaku|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =keiyakushoNo{{anken.hyojijun}} style="text-align: center;">{{anken.keiyakushoNo | default:"－" }}</td>
-                    <td nowrat id =keiyakushoLink{{anken.hyojijun}} style="text-align: center;">{{anken.keiyakushoLink | default:"－" }}</td>
-                    <td nowrat id =onatsuRingiNo{{anken.hyojijun}} style="text-align: center;">{{anken.onatsuRingiNo | default:"－" }}</td>
-                    <td nowrat id =onatsuRingiLink{{anken.hyojijun}} style="text-align: center;">{{anken.onatsuRingiLink | default:"－" }}</td>
-                    <td nowrat id =chumonTanka{{anken.hyojijun}} style="text-align: right;">{{anken.chumonTanka|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =chumonSuu{{anken.hyojijun}} style="text-align: right;">{{anken.chumonSuu|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =chumonGokei{{anken.hyojijun}} style="text-align: right;">{{anken.chumonGokei|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =chumonLink{{anken.hyojijun}} style="text-align: center;">{{anken.chumonLink | default:"－" }}</td>
-                    <td nowrat id =nohinKigen{{anken.hyojijun}} style="text-align: center;">{{anken.nohinKigen | default:"－" }}</td>
-                    <td nowrat id =shiharaiKigen{{anken.hyojijun}} style="text-align: center;">{{anken.shiharaiKigen | default:"－" }}</td>
-                    <td nowrat id =nohinTanka{{anken.hyojijun}} style="text-align: right;">{{anken.nohinTanka|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =nohinSuu{{anken.hyojijun}} style="text-align: right;">{{anken.nohinSuu|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =nohinGokei{{anken.hyojijun}} style="text-align: right;">{{anken.nohinGokei|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =nohinLink{{anken.hyojijun}} style="text-align: center;">{{anken.nohinLink | default:"－" }}</td>
-                    <td nowrat id =shiharaiTanka{{anken.hyojijun}} style="text-align: right;">{{anken.shiharaiTanka|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =konyuSuu{{anken.hyojijun}} style="text-align: right;">{{anken.konyuSuu|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =konyuGokei{{anken.hyojijun}} style="text-align: right;">{{anken.konyuGokei|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =seikyushoLink{{anken.hyojijun}} style="text-align: center;">{{anken.seikyushoLink | default:"－" }}</td>
-                    <td nowrat id =keikaku_Jisseki{{anken.hyojijun}} style="text-align: right;">{{anken.keikaku_Jisseki|default:"－" | intcomma:False  }}</td>
-                    <td nowrat id =kurikaeshiKigen{{anken.hyojijun}} style="text-align: center;">{{anken.kurikaeshiKigen | default:"－" }}</td>
-                    <td nowrat id =konyuKaisha{{anken.hyojijun}} style="text-align: center;">{{anken.konyuKaisha | default:"－" }}</td>
-                    <td nowrat id =dataKoshinbi{{anken.hyojijun}} style="text-align: center;">{{anken.dataKoshinbi | default:"－" }}</td>
-                    <td nowrat id =saishuKoshinsha{{anken.hyojijun}} style="text-align: center;">{{anken.saishuKoshinsha | default:"－" }}</td>
-                    <td nowrat id =shainNo{{anken.hyojijun}} style="text-align: center;">{{anken.shainNo | default:"－" }}</td>
-                    <td nowrat id =tantosha{{anken.hyojijun}} style="text-align: center;">{{anken.tantosha | default:"－" }}</td>
-                    <td nowrat id =comment{{anken.hyojijun}} style="text-align: center;">{{anken.comment | default:"－" }}</td>
-                    <td nowrat id =hyojijun{{anken.hyojijun}} style="text-align: center;">{{anken.hyojijun | default:"－" }}</td>
+                {% for anken in q %}
+                <tr>
+                <th nowrap>{{anken.id}}</th>
+                <td nowrap>{{anken.keiriShonin}}</td>
+                <td nowrap>{{anken.statusCode}}</td>
+                <td nowrap>{{anken.status}}</td>
+                <td nowrap>{{anken.edabanGroup}}</td>
+                <td nowrap>{{anken.shiharaiPattern}}</td>
+                <td nowrap>{{anken.kanriNo}}</td>
+                <td nowrap>{{anken.edaban}}</td>
+                <td nowrap>{{anken.ankenMei}}</td>
+                <td nowrap>{{anken.torihikisakiCode}}</td>
+                <td nowrap>{{anken.torihikisakiMei}}</td>
+                <td nowrap>{{anken.kanjokamoku}}</td>
+                <td nowrap>{{anken.keikakuTanka}}</td>
+                <td nowrap>{{anken.keikakuSuu}}</td>
+                <td nowrap>{{anken.keikakuGokei}}</td>
+                <td nowrap>{{anken.mitsumoriTanka}}</td>
+                <td nowrap>{{anken.mitsumoriSuu}}</td>
+                <td nowrap>{{anken.mitsumoriGokei}}</td>
+                <td >{{anken.mitsumoriLink}}</td>
+                <td nowrap>{{anken.wfNo}}</td>
+                <td nowrap>{{anken.keiyakuKingaku}}</td>
+                <td nowrap>{{anken.chumonTanka}}</td>
+                <td nowrap>{{anken.chumonSuu}}</td>
+                <td nowrap>{{anken.chumonGokei}}</td>
+                <td >{{anken.chumonLink}}</td>
+                <td nowrap>{{anken.nohinTanka}}</td>
+                <td nowrap>{{anken.nohinSuu}}</td>
+                <td nowrap>{{anken.nohinGokei}}</td>
+                <td nowrap>{{anken.shiharaiTanka}}</td>
+                <td nowrap>{{anken.konyuSuu}}</td>
+                <td nowrap>{{anken.konyuGokei}}</td>
+                <td >{{anken.seikyushoLink}}</td>
+                <td nowrap>{{anken.keikaku_Jisseki}}</td>
+                <td nowrap>{{anken.nohinKigen}}</td>
+                <td nowrap>{{anken.kenshuKigen}}</td>
+                <td nowrap>{{anken.shiharaiKigen}}</td>
+                <td nowrap>{{anken.kurikaeshiKigen}}</td>
+                <td >{{anken.ringishoLink}}</td>
+                <td >{{anken.keiyakushoLink}}</td>
+                <td nowrap>{{anken.konyuKaisha}}</td>
+                <td nowrap>{{anken.dataKoshinbi}}</td>
+                <td nowrap>{{anken.saishuKoshinsha}}</td>
+                <td nowrap>{{anken.shainNo}}</td>
+                <td nowrap>{{anken.tantosha}}</td>
+                <td nowrap>{{anken.comment}}</td>
                 </tr>
-            </div>
                 {% endfor %}
             </table>
         </div>

@@ -196,7 +196,7 @@ def keiyakusyoSakuseiSave(request):
             AnkenList.objects.filter(kanriNo=request.session['sessionKanriNo']).update(
                 statusCode = 5,
                 wfNo = form.cleaned_data.get('wfNo'),
-                #keiyakushoNo = form.cleaned_data.get('keiyakushoNo'),
+                keiyakushoNo = form.cleaned_data.get('keiyakushoNo'),
                 keiyakuKingaku = form.cleaned_data.get('keiyakuKingaku'),
                 keiyakushoLink = form.cleaned_data.get('keiyakushoLink'),
                 status = ankenTemp[0].ankenStatus,
@@ -207,7 +207,7 @@ def keiyakusyoSakuseiSave(request):
             AnkenList.objects.filter(kanriNo=request.session['sessionKanriNo']).filter(edaban=edabanTemp).update(
                 statusCode = 5,
                 wfNo = form.cleaned_data.get('wfNo'),
-                #keiyakushoNo = form.cleaned_data.get('keiyakushoNo'),
+                keiyakushoNo = form.cleaned_data.get('keiyakushoNo'),
                 keiyakuKingaku = form.cleaned_data.get('keiyakuKingaku'),
                 keiyakushoLink = form.cleaned_data.get('keiyakushoLink'),
                 status = ankenTemp[0].ankenStatus,
@@ -257,7 +257,6 @@ def keiyakusyoTeiketsuSave(request):
             AnkenList.objects.filter(kanriNo=request.session['sessionKanriNo']).update(
                 statusCode = 6,
                 onatsuRingiNo = form.cleaned_data.get('onatsuRingiNo'),
-                keiyakushoNo = form.cleaned_data.get('keiyakushoNo'),
                 onatsuRingiLink = form.cleaned_data.get('onatsuRingiLink'),
                 status = ankenTemp[0].ankenStatus,
                 saishuKoshinsha = str(request.user),
@@ -267,7 +266,6 @@ def keiyakusyoTeiketsuSave(request):
             AnkenList.objects.filter(kanriNo=request.session['sessionKanriNo']).filter(edaban=edabanTemp).update(
                 statusCode = 6,
                 onatsuRingiNo = form.cleaned_data.get('onatsuRingiNo'),
-                keiyakushoNo = form.cleaned_data.get('keiyakushoNo'),
                 onatsuRingiLink = form.cleaned_data.get('onatsuRingiLink'),
                 status = ankenTemp[0].ankenStatus,
                 saishuKoshinsha = str(request.user),
@@ -393,11 +391,7 @@ def nouhinSave(request):
             print('Detect 空文字！')
             request.session['sessionDisplayCode'] = 'dp80' 
             return render(request, 'ankenkanri/nouhinKan8.html', context)
-        if (request.session['sessionEdaban'] is None) or (request.session['sessionEdaban'] == ""):
-            q = AnkenList.objects.filter(kanriNo=str(request.session['sessionKanriNo']))
-        else:
-            q = AnkenList.objects.filter(kanriNo=str(request.session['sessionKanriNo'])) \
-                                 .filter(edaban=str(request.session['sessionEdaban']))
+        q = AnkenList.objects.filter(kanriNo=str(request.session['sessionKanriNo']))
 
         ##  注文書と納品書の金額比較　一致＞支払単価、数、納品書URLをDB登録、不一致＞警告画面
         if q[0].chumonGokei == int(request.POST.get('nohinTanka'))*int(request.POST.get('nohinSuu')):
@@ -467,7 +461,7 @@ def yosanShokaCheck():
                 edaban0Row.nohinGokei = edaban0Row.nohinGokei + ankenListRow.nohinGokei
                 edaban0Row.konyuGokei = edaban0Row.konyuGokei + ankenListRow.konyuGokei
         AnkenList.objects.filter(edaban=0).filter(kanriNo=edaban0Row.kanriNo).update(
-            #keikakuGokei = edaban0Row.keikakuGokei,  ## ユーザが計画合計値を入力するため不要
+            keikakuGokei = edaban0Row.keikakuGokei,
             mitsumoriGokei = edaban0Row.mitsumoriGokei,
             chumonGokei = edaban0Row.chumonGokei,
             nohinGokei = edaban0Row.nohinGokei,
@@ -526,11 +520,7 @@ def seikyuusyoSave(request):
             print('Detect 空文字！')
             request.session['sessionDisplayCode'] = 'dp90' 
             return render(request, 'ankenkanri/seikyuusyoNyuusyu9.html', context)
-        if (request.session['sessionEdaban'] is None) or (request.session['sessionEdaban'] == ""):
-            q = AnkenList.objects.filter(kanriNo=str(request.session['sessionKanriNo']))
-        else:
-            q = AnkenList.objects.filter(kanriNo=str(request.session['sessionKanriNo'])) \
-                                 .filter(edaban=str(request.session['sessionEdaban']))
+        q = AnkenList.objects.filter(kanriNo=str(request.session['sessionKanriNo'])).filter(edaban=request.session['sessionEdaban'])
 
         ##  注文書と請求書の金額比較　一致＞支払単価、数、請求書URLをDB登録、不一致＞警告画面
         if q[0].chumonGokei == int(request.POST.get('shiharaiTanka'))*int(request.POST.get('konyuSuu')) \
@@ -614,8 +604,6 @@ def shiharaiSave(request):     ## 多分、支払処理が終わっときのこ�
         request.session['sessionDisplayCode'] = 'dp00' 
         return redirect('/ankenkanri2/index')      
     elif "pagePrev" in request.POST:
-        edabanTemp = request.session['sessionEdaban']
-        setStatusCodeCEdaban(request, 9)  ## statusCode = 9        
         request.session['sessionDisplayCode'] = 'dp11' 
         return render(request, 'ankenkanri/page_n.html', context)               
     else:
