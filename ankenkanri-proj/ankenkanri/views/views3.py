@@ -379,6 +379,8 @@ def searchExec(request):
     # return render(request, 'ankenkanri/searchResult.html', context)
     return render(
         request,'ankenkanri2/edit.html',context={'form':form,'ankenList' : q,'kazu':kazu}
+
+        
     )    
 
 def searchParamResume(request):

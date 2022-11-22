@@ -4,9 +4,7 @@
 
 {% block content %}
 
-{% include 'ankenkanri/statusDisplayTop.html' %}
-
-{% comment %} <div class="card bg-light mb-3" style="max-width:600pt;">
+<div class="card bg-light mb-3" style="max-width:600pt;">
   <div class="card-header" ><div class="p-3 mb-2 bg-info text-white"><h3>現状の進捗</h3></div></div>
   <div class="card-body">
     <h5 class="card-title"></h5>
@@ -24,10 +22,7 @@
         </h6>
       </p>
   </div>
-</div> {% endcomment %}
-
-  {% comment %} <iframe src="{% include 'ankenkanri/header.html' %}" frameborder="0"></iframe>
-  <iframe src="{% include 'ankenkanri/footer.html' %}" frameborder="0"></iframe> {% endcomment %}
+</div>
 
 {% comment %} <div class="card bg-light mb-3" style="max-width: 600pt;">
   <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>現状の進捗</h3></div></div>
@@ -54,7 +49,7 @@
   <div class="card-body">
   <form action="/ankenkanri/page_n/" method="POST">{% csrf_token %}
     <h5 class="card-title">ステータスを<b><font style="color:blue;">案件入力完了</font></b>に設定しました。</h5>
-    <p class="card-text"><h5>いずれかをクリックしてください。</h5></p>
+    <p class="card-text">いずれかをクリックしてください。</p>
     <nobr><div style="text-align: center;"><button class="btn btn-primary" type="submit" name="pageN" style="width:120pt;height:35pt;margin: 5px 5px;"> 前画面に戻る</button>&nbsp;&nbsp; 
           <button class="btn btn-primary" type="submit" name="pageTop" style="width:120pt;height:35pt;margin: 5px 5px;"> TOPへ戻る</button>
     </div></form>

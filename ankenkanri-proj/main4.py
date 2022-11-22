@@ -3,11 +3,11 @@ import os
 
 
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE','first_project.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','ankenkanri-proj.settings')
 from django import setup
 setup()
 
-from first_app.models import AnkenTantosha
+from ankenkanri.models import AnkenTantosha
 # AnkenList.objects.create(
 a = AnkenTantosha(
     

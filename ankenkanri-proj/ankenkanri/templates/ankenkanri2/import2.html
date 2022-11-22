@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 
 <html>
@@ -7,473 +8,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>案件管理システム</title>
         <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
-        {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> {% endcomment %}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        {% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> {% endcomment %}
 
 
     </head>
     <div class="card bg-light mb-3" style="max-width: 950pt;">
-
+        {% if  message %}
+        <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>データインポート　エラー</h3>
+        {%else%}
         <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>データインポート　完了</h3>
+        {%endif%}
         </div>
     </div>
 </div>
 <div class="commentandbutton">
-<table>
-    <tr>
-    <td>ファイル名【{{inputFile}}】から、データインポートが完了しました &emsp;&emsp;&emsp;&emsp;</td>
+        
+        {% if not message %}
+    
+    <p>ファイル名【{{inputFile}}】から、{{shurui}}　のデータインポートが完了しました </p>
+        {%else%}
+        <h3>エラーメッセージ</h3>
+            {% for i in message %}
+            
+            {% comment %} {% with a = forloop.counter0 %} {% endcomment %}
+            <p>{{i}}</p>
+            {% comment %} {%endwith%} {% endcomment %}
+                
+                {% endfor%}
+           
+        {% endif%}
+
+
     <td><button onclick="location.href='index'" class="btn btn-primary" type="submit" style="width:100pt;height:30pt;margin: 5px 5px;">TOPへ戻る</button></td>
-    </tr>
-    </table>
 
-    </tr>
-    </table>
 </div> 
-
-
-
-
-{% comment %} <button class="btn btn-primary"　type="submit" href="index" style="width:100pt;height:30pt;margin: 5px 5px;">TOPへ戻る</button><br><br> {% endcomment %}
-{% comment %} <p>ファイル名【{{inputFile}}】から、データインポートが完了しました</p> {% endcomment %}
-
         
 <body>
-    <div style="height:290px; width:1280px; overflow:scroll" class="anken-table">
-        
-        <table >
-                <tr>
-                    <th nowrat >id</th>
-                    <th nowrat >経理承認</th>
-                    <th nowrat >ステータスコード</th>
-                    <th nowrat >案件ステータス</th>
-                    <th nowrat >枝番グループ</th>
-                    <th nowrat >支払パターン</th>
-                    <th nowrat >管理No.</th>
-                    <th nowrat >枝番</th>
-                    <th nowrat >案件名</th>
-                    <th nowrat >取引先コード</th>
-                    <th nowrat >取引先名</th>
-                    <th nowrat >勘定科目</th>
-                    <th nowrat >計画単価</th>
-                    <th nowrat >計画数</th>
-                    <th nowrat >計画合計金額</th>
-                    <th nowrat >見積単価</th>
-                    <th nowrat >見積数</th>
-                    <th nowrat >見積合計金額</th>
-                    <th nowrat >見積書リンク</th>
-                    <th nowrat >稟議書単価</th>
-                    <th nowrat >稟議書数</th>
-                    <th nowrat >稟議書合計</th>
-                    <th nowrat >稟議書No.</th>
-                    <th nowrat >稟議書リンク</th>
-                    <th nowrat >ワークフローNo.</th>
-                    <th nowrat >契約金額</th>
-                    <th nowrat >契約書No.</th>
-                    <th nowrat >契約書リンク</th>
-                    <th nowrat >押捺稟議No.</th>
-                    <th nowrat >押捺稟議リンク</th>
-                    <th nowrat >注文単価</th>
-                    <th nowrat >注文数</th>
-                    <th nowrat >注文合計金額</th>
-                    <th nowrat >注文書リンク</th>
-                    <th nowrat >納品日期限</th>
-                    <th nowrat >検収日期限</th>
-                    <th nowrat >支払日期限</th>
-                    <th nowrat >納品単価</th>
-                    <th nowrat >納品数</th>
-                    <th nowrat >納品合計金額</th>
-                    <th nowrat >納品書リンク</th>
-                    <th nowrat >支払単価</th>
-                    <th nowrat >購入数</th>
-                    <th nowrat >購入合計金額</th>
-                    <th nowrat >請求書リンク情報</th>
-                    <th nowrat >計画－実績</th>
-                    <th nowrat >支払繰返し期限</th>
-                    <th nowrat >購入会社</th>
-                    <th nowrat >最終データ更新日</th>
-                    <th nowrat >最終更新者</th>
-                    <th nowrat >社員番号</th>
-                    <th nowrat >担当者名</th>
-                    <th nowrat >コメント</th>
-                    <th nowrat >表示順</th>
-                </tr>
-
-                {% for anken in ankenList %}
-            <div >
-            <tr >
-                <th nowrat id =id{{anken.hyojijun}}>{{anken.id}}</th>
-                <td nowrat id =keiriShonin{{anken.hyojijun}}>{{anken.keiriShonin}}</td>
-                <td nowrat id =statusCode{{anken.hyojijun}}>{{anken.statusCode}}</td>
-                <td nowrat id =status{{anken.hyojijun}}>{{anken.status}}</td>
-                <td nowrat id =edabanGroup{{anken.hyojijun}}>{{anken.edabanGroup}}</td>
-                <td nowrat id =shiharaiPattern{{anken.hyojijun}}>{{anken.shiharaiPattern}}</td>
-                <td nowrat id =kanriNo{{anken.hyojijun}}>{{anken.kanriNo}}</td>
-                <td nowrat id =edaban{{anken.hyojijun}}>{{anken.edaban}}</td>
-                <td nowrat id =ankenMei{{anken.hyojijun}}>{{anken.ankenMei}}</td>
-                <td nowrat id =torihikisakiCode{{anken.hyojijun}}>{{anken.torihikisakiCode}}</td>
-                <td nowrat id =torihikisakiMei{{anken.hyojijun}}>{{anken.torihikisakiMei}}</td>
-                <td nowrat id =kanjokamoku{{anken.hyojijun}}>{{anken.kanjokamoku}}</td>
-                <td nowrat id =keikakuTanka{{anken.hyojijun}}>{{anken.keikakuTanka}}</td>
-                <td nowrat id =keikakuSuu{{anken.hyojijun}}>{{anken.keikakuSuu}}</td>
-                <td nowrat id =keikakuGokei{{anken.hyojijun}}>{{anken.keikakuGokei}}</td>
-                <td nowrat id =mitsumoriTanka{{anken.hyojijun}}>{{anken.mitsumoriTanka}}</td>
-                <td nowrat id =mitsumoriSuu{{anken.hyojijun}}>{{anken.mitsumoriSuu}}</td>
-                <td nowrat id =mitsumoriGokei{{anken.hyojijun}}>{{anken.mitsumoriGokei}}</td>
-                <td nowrat id =mitsumoriLink{{anken.hyojijun}}>{{anken.mitsumoriLink}}</td>
-                <td nowrat id =ringiTanka{{anken.hyojijun}}>{{anken.ringiTanka}}</td>
-                <td nowrat id =ringiSuu{{anken.hyojijun}}>{{anken.ringiSuu}}</td>
-                <td nowrat id =ringiGokei{{anken.hyojijun}}>{{anken.ringiGokei}}</td>
-                <td nowrat id =ringishoNo{{anken.hyojijun}}>{{anken.ringishoNo}}</td>
-                <td nowrat id =ringishoLink{{anken.hyojijun}}>{{anken.ringishoLink}}</td>
-                <td nowrat id =wfNo{{anken.hyojijun}}>{{anken.wfNo}}</td>
-                <td nowrat id =keiyakuKingaku{{anken.hyojijun}}>{{anken.keiyakuKingaku}}</td>
-                <td nowrat id =keiyakushoNo{{anken.hyojijun}}>{{anken.keiyakushoNo}}</td>
-                <td nowrat id =keiyakushoLink{{anken.hyojijun}}>{{anken.keiyakushoLink}}</td>
-                <td nowrat id =onatsuRingiNo{{anken.hyojijun}}>{{anken.onatsuRingiNo}}</td>
-                <td nowrat id =onatsuRingiLink{{anken.hyojijun}}>{{anken.onatsuRingiLink}}</td>
-                <td nowrat id =chumonTanka{{anken.hyojijun}}>{{anken.chumonTanka}}</td>
-                <td nowrat id =chumonSuu{{anken.hyojijun}}>{{anken.chumonSuu}}</td>
-                <td nowrat id =chumonGokei{{anken.hyojijun}}>{{anken.chumonGokei}}</td>
-                <td nowrat id =chumonLink{{anken.hyojijun}}>{{anken.chumonLink}}</td>
-                <td nowrat id =nohinKigen{{anken.hyojijun}}>{{anken.nohinKigen}}</td>
-                <td nowrat id =kenshuKigen{{anken.hyojijun}}>{{anken.kenshuKigen}}</td>
-                <td nowrat id =shiharaiKigen{{anken.hyojijun}}>{{anken.shiharaiKigen}}</td>
-                <td nowrat id =nohinTanka{{anken.hyojijun}}>{{anken.nohinTanka}}</td>
-                <td nowrat id =nohinSuu{{anken.hyojijun}}>{{anken.nohinSuu}}</td>
-                <td nowrat id =nohinGokei{{anken.hyojijun}}>{{anken.nohinGokei}}</td>
-                <td nowrat id =nohinLink{{anken.hyojijun}}>{{anken.nohinLink}}</td>
-                <td nowrat id =shiharaiTanka{{anken.hyojijun}}>{{anken.shiharaiTanka}}</td>
-                <td nowrat id =konyuSuu{{anken.hyojijun}}>{{anken.konyuSuu}}</td>
-                <td nowrat id =konyuGokei{{anken.hyojijun}}>{{anken.konyuGokei}}</td>
-                <td nowrat id =seikyushoLink{{anken.hyojijun}}>{{anken.seikyushoLink}}</td>
-                <td nowrat id =keikaku_Jisseki{{anken.hyojijun}}>{{anken.keikaku_Jisseki}}</td>
-                <td nowrat id =kurikaeshiKigen{{anken.hyojijun}}>{{anken.kurikaeshiKigen}}</td>
-                <td nowrat id =konyuKaisha{{anken.hyojijun}}>{{anken.konyuKaisha}}</td>
-                <td nowrat id =dataKoshinbi{{anken.hyojijun}}>{{anken.dataKoshinbi}}</td>
-                <td nowrat id =saishuKoshinsha{{anken.hyojijun}}>{{anken.saishuKoshinsha}}</td>
-                <td nowrat id =shainNo{{anken.hyojijun}}>{{anken.shainNo}}</td>
-                <td nowrat id =tantosha{{anken.hyojijun}}>{{anken.tantosha}}</td>
-                <td nowrat id =comment{{anken.hyojijun}}>{{anken.comment}}</td>
-                <td nowrat id =hyojijun{{anken.hyojijun}}>{{anken.hyojijun}}</td>
-            </tr>
-        </div>
-            {% endfor %}
-        </table>
-    </div>
-    <input type = "hidden" id = "kazu" name="kazu" value= {{kazu}}>
-    <script>
-        for (let i=1; i < document.getElementById('kazu').value+1; i++) {
-            
-            let dateHyoji = document.getElementById('shiharaiKigen'+i).innerHTML;
-            dateHyoji = dateHyoji.replace('年','-');
-            dateHyoji = dateHyoji.replace('月','-');
-            dateHyoji = dateHyoji.replace('日','/');
-            dateHyoji = dateHyoji.substring(0, dateHyoji.indexOf("/"));
-            
-            let dateShiharai = new Date(dateHyoji); 
-
-            dateHyoji = document.getElementById('nohinKigen'+i).innerHTML;
-            dateHyoji = dateHyoji.replace('年','-');
-            dateHyoji = dateHyoji.replace('月','-');
-            dateHyoji = dateHyoji.replace('日','/');
-            dateHyoji = dateHyoji.substring(0, dateHyoji.indexOf("/"));
-            
-            let dateNohin = new Date(dateHyoji); 
-
-            if (document.getElementById('statusCode'+i).innerHTML==10){
-                document.getElementById("keiriShonin"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("statusCode"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("status"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("edabanGroup"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("shiharaiPattern"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("kanriNo"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("edaban"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("ankenMei"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("torihikisakiCode"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("torihikisakiMei"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("kanjokamoku"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("keikakuTanka"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("keikakuSuu"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("keikakuGokei"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("mitsumoriTanka"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("mitsumoriSuu"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("mitsumoriGokei"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("mitsumoriLink"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("ringiTanka"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("ringiSuu"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("ringiGokei"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("ringishoNo"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("ringishoLink"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("wfNo"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("keiyakuKingaku"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("keiyakushoNo"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("keiyakushoLink"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("onatsuRingiNo"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("onatsuRingiLink"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("chumonTanka"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("chumonSuu"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("chumonGokei"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("chumonLink"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("nohinKigen"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("kenshuKigen"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("shiharaiKigen"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("nohinTanka"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("nohinSuu"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("nohinGokei"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("nohinLink"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("shiharaiTanka"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("konyuSuu"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("konyuGokei"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("seikyushoLink"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("keikaku_Jisseki"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("kurikaeshiKigen"+i).style.backgroundColor = 'lightgray'; 
-                document.getElementById("konyuKaisha"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("dataKoshinbi"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("saishuKoshinsha"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("shainNo"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("tantosha"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("comment"+i).style.backgroundColor = 'lightgray';
-                document.getElementById("hyojijun"+i).style.backgroundColor = 'lightgray'; 
-                
-                
-            }
-            
-            else if (document.getElementById('statusCode'+i).innerHTML==20){
-                document.getElementById("keiriShonin"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("statusCode"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("status"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("edabanGroup"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("shiharaiPattern"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("kanriNo"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("edaban"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("ankenMei"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("torihikisakiCode"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("torihikisakiMei"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("kanjokamoku"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("keikakuTanka"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("keikakuSuu"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("keikakuGokei"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("mitsumoriTanka"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("mitsumoriSuu"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("mitsumoriGokei"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("mitsumoriLink"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("ringiTanka"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("ringiSuu"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("ringiGokei"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("ringishoNo"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("ringishoLink"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("wfNo"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("keiyakuKingaku"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("keiyakushoNo"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("keiyakushoLink"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("onatsuRingiNo"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("onatsuRingiLink"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("chumonTanka"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("chumonSuu"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("chumonGokei"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("chumonLink"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("nohinKigen"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("kenshuKigen"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("shiharaiKigen"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("nohinTanka"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("nohinSuu"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("nohinGokei"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("nohinLink"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("shiharaiTanka"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("konyuSuu"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("konyuGokei"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("seikyushoLink"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("keikaku_Jisseki"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("kurikaeshiKigen"+i).style.backgroundColor = '#b0c4de'; 
-                document.getElementById("konyuKaisha"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("dataKoshinbi"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("saishuKoshinsha"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("shainNo"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("tantosha"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("comment"+i).style.backgroundColor = '#b0c4de';
-                document.getElementById("hyojijun"+i).style.backgroundColor = '#b0c4de'; 
-                
-                
-            }
-            else if (dateNohin<=new Date(Date.now()) && document.getElementById('statusCode'+i).innerHTML<8){
-                document.getElementById("keiriShonin"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("statusCode"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("status"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("edabanGroup"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("shiharaiPattern"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("kanriNo"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("edaban"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("ankenMei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("torihikisakiCode"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("torihikisakiMei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("kanjokamoku"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keikakuTanka"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keikakuSuu"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keikakuGokei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("mitsumoriTanka"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("mitsumoriSuu"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("mitsumoriGokei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("mitsumoriLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("ringiTanka"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("ringiSuu"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("ringiGokei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("ringishoNo"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("ringishoLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("wfNo"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keiyakuKingaku"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keiyakushoNo"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keiyakushoLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("onatsuRingiNo"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("onatsuRingiLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("chumonTanka"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("chumonSuu"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("chumonGokei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("chumonLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("nohinKigen"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("nohinKigen"+i).style.color = 'red';
-                document.getElementById("nohinKigen"+i).style.fontWeight  = 'bolder';
-                document.getElementById("kenshuKigen"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("shiharaiKigen"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("nohinTanka"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("nohinSuu"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("nohinGokei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("nohinLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("shiharaiTanka"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("konyuSuu"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("konyuGokei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("seikyushoLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keikaku_Jisseki"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("kurikaeshiKigen"+i).style.backgroundColor = '#ffa07a'; 
-                document.getElementById("konyuKaisha"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("dataKoshinbi"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("saishuKoshinsha"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("shainNo"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("tantosha"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("comment"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("hyojijun"+i).style.backgroundColor = '#ffa07a'; 
-                
-                
-            }                
-
-       
-
-            else if (dateShiharai<=new Date(Date.now())){
-                document.getElementById("keiriShonin"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("statusCode"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("status"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("edabanGroup"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("shiharaiPattern"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("kanriNo"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("edaban"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("ankenMei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("torihikisakiCode"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("torihikisakiMei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("kanjokamoku"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keikakuTanka"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keikakuSuu"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keikakuGokei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("mitsumoriTanka"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("mitsumoriSuu"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("mitsumoriGokei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("mitsumoriLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("ringiTanka"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("ringiSuu"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("ringiGokei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("ringishoNo"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("ringishoLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("wfNo"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keiyakuKingaku"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keiyakushoNo"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keiyakushoLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("onatsuRingiNo"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("onatsuRingiLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("chumonTanka"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("chumonSuu"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("chumonGokei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("chumonLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("nohinKigen"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("kenshuKigen"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("shiharaiKigen"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("shiharaiKigen"+i).style.color = 'red';
-                document.getElementById("shiharaiKigen"+i).style.fontWeight  = 'bolder';
-                document.getElementById("nohinTanka"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("nohinSuu"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("nohinGokei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("nohinLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("shiharaiTanka"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("konyuSuu"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("konyuGokei"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("seikyushoLink"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("keikaku_Jisseki"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("kurikaeshiKigen"+i).style.backgroundColor = '#ffa07a'; 
-                document.getElementById("konyuKaisha"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("dataKoshinbi"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("saishuKoshinsha"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("shainNo"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("tantosha"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("comment"+i).style.backgroundColor = '#ffa07a';
-                document.getElementById("hyojijun"+i).style.backgroundColor = '#ffa07a'; 
-                
-                
-            }
-
-            else if (document.getElementById("statusCode"+i).innerHTML != 99){
-                document.getElementById("keiriShonin"+i).style.backgroundColor = 'aqua';
-                document.getElementById("statusCode"+i).style.backgroundColor = 'aqua';
-                document.getElementById("status"+i).style.backgroundColor = 'aqua';
-                document.getElementById("edabanGroup"+i).style.backgroundColor = 'aqua';
-                document.getElementById("shiharaiPattern"+i).style.backgroundColor = 'aqua';
-                document.getElementById("kanriNo"+i).style.backgroundColor = 'aqua';
-                document.getElementById("edaban"+i).style.backgroundColor = 'aqua';
-                document.getElementById("ankenMei"+i).style.backgroundColor = 'aqua';
-                document.getElementById("torihikisakiCode"+i).style.backgroundColor = 'aqua';
-                document.getElementById("torihikisakiMei"+i).style.backgroundColor = 'aqua';
-                document.getElementById("kanjokamoku"+i).style.backgroundColor = 'aqua';
-                document.getElementById("keikakuTanka"+i).style.backgroundColor = 'aqua';
-                document.getElementById("keikakuSuu"+i).style.backgroundColor = 'aqua';
-                document.getElementById("keikakuGokei"+i).style.backgroundColor = 'aqua';
-                document.getElementById("mitsumoriTanka"+i).style.backgroundColor = 'aqua';
-                document.getElementById("mitsumoriSuu"+i).style.backgroundColor = 'aqua';
-                document.getElementById("mitsumoriGokei"+i).style.backgroundColor = 'aqua';
-                document.getElementById("mitsumoriLink"+i).style.backgroundColor = 'aqua';
-                document.getElementById("ringiTanka"+i).style.backgroundColor = 'aqua';
-                document.getElementById("ringiSuu"+i).style.backgroundColor = 'aqua';
-                document.getElementById("ringiGokei"+i).style.backgroundColor = 'aqua';
-                document.getElementById("ringishoNo"+i).style.backgroundColor = 'aqua';
-                document.getElementById("ringishoLink"+i).style.backgroundColor = 'aqua';
-                document.getElementById("wfNo"+i).style.backgroundColor = 'aqua';
-                document.getElementById("keiyakuKingaku"+i).style.backgroundColor = 'aqua';
-                document.getElementById("keiyakushoNo"+i).style.backgroundColor = 'aqua';
-                document.getElementById("keiyakushoLink"+i).style.backgroundColor = 'aqua';
-                document.getElementById("onatsuRingiNo"+i).style.backgroundColor = 'aqua';
-                document.getElementById("onatsuRingiLink"+i).style.backgroundColor = 'aqua';
-                document.getElementById("chumonTanka"+i).style.backgroundColor = 'aqua';
-                document.getElementById("chumonSuu"+i).style.backgroundColor = 'aqua';
-                document.getElementById("chumonGokei"+i).style.backgroundColor = 'aqua';
-                document.getElementById("chumonLink"+i).style.backgroundColor = 'aqua';
-                document.getElementById("nohinKigen"+i).style.backgroundColor = 'aqua';
-                document.getElementById("kenshuKigen"+i).style.backgroundColor = 'aqua';
-                document.getElementById("shiharaiKigen"+i).style.backgroundColor = 'aqua';
-                document.getElementById("nohinTanka"+i).style.backgroundColor = 'aqua';
-                document.getElementById("nohinSuu"+i).style.backgroundColor = 'aqua';
-                document.getElementById("nohinGokei"+i).style.backgroundColor = 'aqua';
-                document.getElementById("nohinLink"+i).style.backgroundColor = 'aqua';
-                document.getElementById("shiharaiTanka"+i).style.backgroundColor = 'aqua';
-                document.getElementById("konyuSuu"+i).style.backgroundColor = 'aqua';
-                document.getElementById("konyuGokei"+i).style.backgroundColor = 'aqua';
-                document.getElementById("seikyushoLink"+i).style.backgroundColor = 'aqua';
-                document.getElementById("keikaku_Jisseki"+i).style.backgroundColor = 'aqua';
-                document.getElementById("kurikaeshiKigen"+i).style.backgroundColor = 'aqua'; 
-                document.getElementById("konyuKaisha"+i).style.backgroundColor = 'aqua';
-                document.getElementById("dataKoshinbi"+i).style.backgroundColor = 'aqua';
-                document.getElementById("saishuKoshinsha"+i).style.backgroundColor = 'aqua';
-                document.getElementById("shainNo"+i).style.backgroundColor = 'aqua';
-                document.getElementById("tantosha"+i).style.backgroundColor = 'aqua';
-                document.getElementById("comment"+i).style.backgroundColor = 'aqua';
-                document.getElementById("hyojijun"+i).style.backgroundColor = 'aqua'; 
-            }
-        }
-    </script> 
+    {% include 'ankenkanri2/kyotsu.html' %}
 
 
 </body>
