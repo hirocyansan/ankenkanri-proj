@@ -40,6 +40,8 @@ from .views3 import searchContextSet
 from .viewsa import dataexport, export2, dataimport, import2
 from .viewsa import edit, edit2
 
+DEBUG_MODE = 'OFF'
+
 def sysExit(request):
 
     sys.exit()
@@ -191,9 +193,11 @@ def checkKanriNo(request):
                     return(OK)
     return(NG)
 
-DEBUG_MODE = 'ON'
+#DEBUG_MODE = 'ON'
+#DEBUG_MODE = 'OFF'
 def statusCodeCheck(request, selectedStatus):
-    if DEBUG_MODE == 'ON':
+
+    if DEBUG_MODE == 'OFF':
         return 'OK'
     ankenTemp = AnkenList.objects.filter(kanriNo=request.session['sessionKanriNo']).filter(edaban=request.session['sessionEdaban'])
     if ankenTemp[0].statusCode < selectedStatus:
@@ -223,22 +227,17 @@ def service_start(request):
                                                 : AnkenList.objects.order_by('hyojijun'),'kazu':kazu}
         )
     elif "dataExportButton" in request.POST:
-        form = forms.formAnkenList()
-        kazu = AnkenList.objects.all().count()  
         request.session['sessionDisplayCode'] = 'dp210' 
-        return render(request, 'ankenkanri2/export.html',context={'form':form,'ankenList' \
-                                                : AnkenList.objects.order_by('hyojijun'),'kazu':kazu})
+        return render(request, 'ankenkanri2/export.html')
     elif "dataImportButton" in request.POST:
-        form = forms.formAnkenList()
-        kazu = AnkenList.objects.all().count()
         request.session['sessionDisplayCode'] = 'dp220' 
-        return render(request, 'ankenkanri2/import.html',context={'form':form,'ankenList' \
-                                                : AnkenList.objects.order_by('hyojijun'),'kazu':kazu})
+        return render(request, 'ankenkanri2/import.html')
     elif "variousSettingsButton" in request.POST:
         request.session['sessionDisplayCode'] = 'dp240' 
         return render(request, 'ankenkanri/variousSettings.html')
     elif "usageButton" in request.POST:
-        return redirect('/ankenkanri2/index')
+        return render(request, 'ankenkanri/manual.html')        
+        #return redirect('/ankenkanri2/index')
 
     else:  ## "terminateButton" in request.POST:
         logout(request)
@@ -404,7 +403,7 @@ def page_n(request):
             ankenTemp = AnkenStatus.objects.filter(ankenStatusCode=1)
             edabanTemp = request.session['sessionEdaban']
             if (edabanTemp is None) or (edabanTemp == ""):  ## statusCode,statusをDBへ記録
-                AnkenList.objects.filter(kanriNo=request.session['sessionKanriNo']).update(
+                AnkenList.objects.filter(kanriNo=request.session['sessionKanriNo']).filter(edaban__isnull=True).update(
                     statusCode = 1,
                     status = ankenTemp[0].ankenStatus,
                     saishuKoshinsha = str(request.user),
@@ -417,12 +416,12 @@ def page_n(request):
                     saishuKoshinsha = str(request.user),
                     dataKoshinbi = timezone.now()
                 )
-                request.session['sessionDisplayCode'] = 'dp11' 
-                context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])
-                return render(request, 'ankenkanri/page_n.html', context)
+            request.session['sessionDisplayCode'] = 'dp11' 
+            context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])
+            return render(request, 'ankenkanri/page_n.html', context)
         elif "pageTop" in request.POST:
-                request.session['sessionDisplayCode'] = 'dp00' 
-                return redirect('/ankenkanri2/index')
+            request.session['sessionDisplayCode'] = 'dp00' 
+            return redirect('/ankenkanri2/index')
         else:
             return render(request, 'ankenkanri/ankenNyuuryokuKan1.html')
 
@@ -446,9 +445,9 @@ def page_n(request):
                     saishuKoshinsha = str(request.user),
                     dataKoshinbi = timezone.now()
                 )
-                request.session['sessionDisplayCode'] = 'dp11' 
-                context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])
-                return render(request, 'ankenkanri/page_n.html', context)
+            request.session['sessionDisplayCode'] = 'dp11' 
+            context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])
+            return render(request, 'ankenkanri/page_n.html', context)
         elif "pageTop" in request.POST:
                 request.session['sessionDisplayCode'] = 'dp00' 
                 return redirect('/ankenkanri2/index')
@@ -478,7 +477,7 @@ def page_n(request):
                 request.session['sessionDisplayCode'] = 'dp00' 
                 return redirect('/ankenkanri2/index')
 
-        ## 案件入力完了画面
+        ## 案件入力完了ボタンが押された(page_n表示中)
         if  "ankenNyuuryokuKan1"  in request.POST:  # (クリックしたボタンに応じたHTMLへ分岐させる)
             if statusCodeCheck(request, 1) == "NG":  ## 既に終了した処理のキーが押されたら、入力無視
                 request.session['sessionDisplayCode'] = 'dp11'
@@ -486,8 +485,10 @@ def page_n(request):
                 return render(request, 'ankenkanri/page_n.html', context)
             setStatusCodeCEdaban(request, 1)  ## statusCode = 1
             print("Detected the button1")
-            request.session['sessionDisplayCode'] = 'dp10'   
-            context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])
+            request.session['sessionDisplayCode'] = 'dp10'
+            #debug_mode = DEBUG_MODE
+            context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])   
+            #context = contextSetWDEBUG( request.session['sessionKanriNo'], request.session['sessionEdaban'], debug_mode)
             return render(request, 'ankenkanri/ankenNyuuryokuKan1.html', context)
 
         ## 見積書作成依頼の終了ボタンが押された（page_n表示中）
@@ -651,7 +652,7 @@ def page_n(request):
                 request.session['sessionDisplayCode'] = 'dp11'
                 context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])
                 return render(request, 'ankenkanri/page_n.html', context)
-            setStatusCodeCEdaban(request, 10)  ## statusCode = 10
+            #setStatusCodeCEdaban(request, 10)  ## statusCode = 10
             print("Detected the button10")
             request.session['sessionDisplayCode'] = 'dp100'
             context = contextSet( request.session['sessionKanriNo'], request.session['sessionEdaban'])
@@ -747,6 +748,31 @@ def contextSetWMessage( inData, edaBan, message):  #　 inData： 案件管理No
         'buttonGray': buttonGray,
         'q': q,
         'message': message,
+    }
+    return(context)
+
+def contextSetWDEBUG( inData, edaBan, debug_mode):  #　 inData： 案件管理No.
+    model = AnkenList
+    ctx = {}
+    if (edaBan is None) or (edaBan==""):
+        q = AnkenList.objects.filter(kanriNo=inData).filter(edaban__isnull=True)
+    else:
+        q = AnkenList.objects.filter(kanriNo=inData).filter(edaban=edaBan)
+
+    ctx["object"] = q
+    badgeName, buttonName0, buttonName, buttonName2 = badgeButtonSet()
+    print('(contextSet)q[0] =', q[0])
+    badgeGray = q[0].statusCode
+    buttonGray = q[0].statusCode
+    context = {
+        'badgeName': badgeName,
+        'buttonName0': buttonName0,
+        'buttonName': buttonName,
+        'buttonName2': buttonName2,
+        'badgeGray': badgeGray,
+        'buttonGray': buttonGray,
+        'q': q,
+        'debug_mode': debug_mode,
     }
     return(context)
 

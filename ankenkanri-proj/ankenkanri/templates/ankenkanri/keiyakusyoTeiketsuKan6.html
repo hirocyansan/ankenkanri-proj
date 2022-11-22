@@ -4,7 +4,9 @@
 
 {% block content %}
 
-<div class="card bg-light mb-3" style="max-width:600pt;">
+{% include 'ankenkanri/statusDisplayTop.html' %}
+
+{% comment %} <div class="card bg-light mb-3" style="max-width:600pt;">
   <div class="card-header" ><div class="p-3 mb-2 bg-info text-white"><h3>現状の進捗</h3></div></div>
   <div class="card-body">
     <h5 class="card-title"></h5>
@@ -22,14 +24,14 @@
         </h6>
       </p>
   </div>
-</div>
+</div> {% endcomment %}
 
-<div class="card bg-light mb-3" style="max-width: 600pt;">
+<div class="card bg-light mb-3" style="max-width: 600pt; margin-top: 10px; margin-left: 10px;">
   <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>契約締結完了</h3></div></div>
   <div class="card-body">
     <h5 class="card-title"></h5>
     <nobr>
-    <p class="card-text">押捺稟議書No. 契約書No. 稟議書URLを入力して「確定」を押してください。:<h5 style="color:red;"><b>{{ message }}</b></h5>
+    <p class="card-text"><h5><li>押捺稟議書No. 契約書No. 稟議書URLを入力して「確定」を押してください。</li></h5><h5 style="color:red;"><b>{{ message }}</b></h5>
 
         <form action="/ankenkanri/keiyakusyoTeiketsuSave" method="POST">{% csrf_token %}
           <nobr>

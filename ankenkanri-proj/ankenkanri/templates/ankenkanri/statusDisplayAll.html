@@ -1,0 +1,54 @@
+
+{% load humanize %} 
+
+<div class="card bg-light mb-3" style="max-width:850pt; margin-top: 10px; margin-left: 10px;">
+  <div class="card-header" ><div class="p-3 mb-2 bg-info text-white"><h3>現状の進捗</h3></div></div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+      <p class="card-text">
+        <h6>
+          {% for obj in q %}
+            <div style="color: #3B3838"><li><bold><font size="5">選択中の案件番号：{{ obj.kanriNo }} &ensp;&ensp;枝番：{{ obj.edaban| default:"なし"  }}</bold></h6>
+            <table class="table table">
+              <thead style="font-size:16px; text-align: center;">
+                <tr><th>経理承認</th><th>案件名</th><th>取引先名</th><th>計画合計金額</th><th>支払期限</th><th>購入会社</th></tr>
+              </p></thead>
+              {% if obj.keiriShonin == False %}
+                <tbody style="font-size:16px; text-align: center;">
+                  <tr><td><font style="color:red;"><b>未承認</b></font></td><td>{{ obj.ankenMei }}</td><td>{{ obj.torihikisakiMei }}</td><td>{{ obj.konyuGokei |default:"－" | intcomma:False }}</td><td>{{ obj.shiharaiKigen }}</td><td>{{ obj.konyuKaisha }}</td></tr>
+                </tbody>
+              {% else %}
+                <tbody style="font-size:16px; text-align: center;">
+                  <tr><td>承認済</td><td>{{ obj.ankenMei }}</td><td>{{ obj.torihikisakiMei }}</td><td>{{ obj.konyuGokei  |default:"－" | intcomma:False }}</td><td>{{ obj.shiharaiKigen }}</td><td>{{ obj.konyuKaisha }}</td></tr>
+                </font></tbody>
+              {% endif %}
+          {% endfor %}
+        </font></table> 
+
+         {% comment %} {% for obj in q %}
+            {% if obj.keiriShonin == False %}
+               <div style="color: #3B3838"><li><bold><font size="5">選択中の案件番号：{{ obj.kanriNo }} &ensp;&ensp;枝番：{{ obj.edaban| default:"なし"  }}</bold></br><font size="3">（ステータス＝{{ obj.status }}、コード＝{{ obj.statusCode }}、<font style="color:red;"><b>経理承認＝{{ obj.keiriShonin}}</b></font>、支払パターン＝{{ obj.shiharaiPattern }}、案件名＝{{ obj.ankenMei }}）
+               </font></font></li></div>
+            {% else %}
+               <div style="color: #3B3838"><li><bold><font size="5">選択中の案件番号：{{ obj.kanriNo }} &ensp;&ensp;枝番：{{ obj.edaban| default:"なし"  }}</bold></br><font size="3">（ステータス＝{{ obj.status }}、コード＝{{ obj.statusCode }}、経理承認＝{{ obj.keiriShonin}}、支払パターン＝{{ obj.shiharaiPattern }}、案件名＝{{ obj.ankenMei }}）
+               </font></font></li></div>
+            {% endif %}
+        {% endfor %} {% endcomment %}
+        </h6>      
+        <h5><nobr>
+        {% for i in badgeName %}
+            {% if forloop.counter <= badgeGray %}
+                <span class="badge text-bg-secondary" style="width:110pt;height:30pt;margin: 5px 5px;">☑{{ i | linebreaksbr }}</span>
+                <span class="badge text-bg-light">
+                {% if forloop.counter < 10 %}<font size = "5" face=" Meiryo　UI ">⇨</font>{% endif %}</span>
+                {% if forloop.counter == 5 %} </br> {% endif %}
+            {% else %}
+                <span class="badge text-bg-info" style="width:110pt;height:30pt;margin: 5px 5px;">☐{{ i | linebreaksbr }}</span>
+                <span class="badge text-bg-light">
+                {% if forloop.counter < 10 %}<font size = "5" face=" Meiryo　UI ">⇨</font>{% endif %}</span>
+                {% if forloop.counter == 5 %} </br> {% endif %}
+            {% endif %}
+        {% endfor %}
+  </div>
+  </div>
+</div>

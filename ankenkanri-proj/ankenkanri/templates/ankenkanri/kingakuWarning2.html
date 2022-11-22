@@ -4,8 +4,9 @@
 
 {% block content %}
 
+{% include 'ankenkanri/statusDisplayTop.html' %}
 
-<div class="card bg-light mb-3" style="max-width:600pt;">
+{% comment %} <div class="card bg-light mb-3" style="max-width:600pt;">
   <div class="card-header" ><div class="p-3 mb-2 bg-info text-white"><h3>現状の進捗</h3></div></div>
   <div class="card-body">
     <h5 class="card-title"></h5>
@@ -23,9 +24,9 @@
         </h6>
       </p>
   </div>
-</div>
+</div> {% endcomment %}
 
-<div class="card" style="width:600pt;height:200pt;margin: 5px 5px;">
+<div class="card bg-light mb-3" style="width:600pt;height:200pt;margin: 5px 5px; margin-top: 10px; margin-left: 10px;">
   <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>入力金額の警告</h3></div></div>
   <div class="card-body">
   <form action="/ankenkanri/kingakuW2" method="POST">{% csrf_token %}

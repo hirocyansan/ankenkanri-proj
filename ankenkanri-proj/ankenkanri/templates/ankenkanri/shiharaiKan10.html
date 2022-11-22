@@ -4,8 +4,9 @@
 
 {% block content %}
 
+{% include 'ankenkanri/statusDisplayTop.html' %}
 
-<div class="card bg-light mb-3" style="max-width:600pt;">
+{% comment %} <div class="card bg-light mb-3" style="max-width:600pt;">
   <div class="card-header" ><div class="p-3 mb-2 bg-info text-white"><h3>現状の進捗</h3></div></div>
   <div class="card-body">
     <h5 class="card-title"></h5>
@@ -23,21 +24,19 @@
         </h6>
       </p>
   </div>
-</div>
+</div> {% endcomment %}
 
-<div class="card bg-light mb-3" style="max-width: 600pt;">
+<div class="card bg-light mb-3" style="max-width: 600pt; margin-top: 10px; margin-left: 10px;">
   <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>支払処理完了</h3></div></div>
   <div class="card-body">
+    <form action="/ankenkanri/shiharaiSave" method="POST">{% csrf_token %}
     <h5 class="card-title"></h5>
-    <nobr>
-    <p class="card-text">経理に支払処理を依頼完了した場合には「終了」、そうではない場合は「前画面に戻る」又は「TOPへ戻る」<br>を押してください。
-
-        <form action="/ankenkanri/shiharaiSave" method="POST">{% csrf_token %}
-          <div style="text-align: center;">
+          <p class="card-text"><h5><li>経理に支払処理を依頼完了した場合には「終了」、そうではない場合は「前画面に戻る」<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;又は「TOPへ戻る」を押してください。</li></h5>
+          <div style="text-align: center;"><nobr>
           <button class="btn btn-primary" type="submit" name="confirm" style="width:120pt;height:35pt;margin: 5px 5px;"> 終了</button> &nbsp;&nbsp; 
           <button class="btn btn-primary" type="submit" name="pagePrev" style="width:120pt;height:35pt;margin: 5px 5px;"> 前画面に戻る</button> &nbsp;&nbsp; 
           <button class="btn btn-primary" type="submit" name="pageTop" style="width:120pt;height:35pt;margin: 5px 5px;"> TOPへ戻る</button> &nbsp;&nbsp; 
-          </div>
+          </nobr></div>
         </form>
         </div>
       </div>

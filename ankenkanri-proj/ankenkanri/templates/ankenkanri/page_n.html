@@ -5,7 +5,9 @@
 
 {% block content %}
 
-<div class="card bg-light mb-3" style="max-width:850pt;">
+{% include 'ankenkanri/statusDisplayAll.html' %}
+
+{% comment %} <div class="card bg-light mb-3" style="max-width:850pt;">
   <div class="card-header" ><div class="p-3 mb-2 bg-info text-white"><h3>現状の進捗</h3></div></div>
   <div class="card-body">
     <h5 class="card-title"></h5>
@@ -37,8 +39,9 @@
         {% endfor %}
   </div>
   </div>
-</div>
-<div class="card bg-light mb-3" style="max-width:850pt;">
+</div> {% endcomment %}
+
+<div class="card bg-light mb-3" style="max-width:850pt; margin-top: 10px; margin-left: 10px;">
   <div class="card-header"><div class="p-3 mb-2 bg-info text-white"><h3>終了済み処理を選択してください。</h3></div></div>
   <div class="card-body">
     <h5 class="card-title"></h5>
@@ -49,7 +52,11 @@
             {% comment %} {% for i, j in buttonName|zip:buttonName2 %} {% endcomment %}
               {% for j, i in buttonName0.items %}
                 {% if forloop.counter <= buttonGray %}  
-                        <button class="btn btn-secondary" type="submit" name="{{ j }}" style="font-size:20px;width:250pt;height:35pt;margin: 5px 5px;">{{ i }}</button>
+                  <!-- DEBUG_MODE = ON-->
+                  <button class="btn btn-secondary" type="submit" name="{{ j }}" style="font-size:20px;width:250pt;height:35pt;margin: 5px 5px;">{{ i }}</button>
+                  <!-- DEBUG_MODE = OFF の場合、↓を有効化する-->
+                  {% comment %} <button class="btn btn-secondary" type="submit" name="{{ j }}" disabled style="font-size:20px;width:250pt;height:35pt;margin: 5px 5px;">{{ i }}</button> {% endcomment %}
+
                     {% if forloop.counter == 3 %} </br> {% endif %}
                     {% if forloop.counter == 6 %} </br> {% endif %}
                     {% if forloop.counter == 9 %} </br> {% endif %}            
@@ -61,7 +68,7 @@
                 {% endif %}
               {% endfor %}
             {% comment %} <a href="/ankenkanri/rtn-top" class="btn btn-primary" name="buttonRTop" style="width:250pt;height:35pt;margin: 5px 5px;">TOPへ戻る</a> {% endcomment %}
-	          <button class="btn btn-primary" type="submit" name="pageTop" style="font-size:20px;width:250pt;height:35pt;margin: 5px 5px;"> TOPへ戻る</button>
+	          <button class="btn btn-info" type="submit" name="pageTop" style="font-size:20px;width:250pt;height:35pt;margin: 5px 5px 5px 355px;"> TOPへ戻る</button>
         </form>
         </nobr></h4>
   </div>
